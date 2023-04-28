@@ -5,11 +5,13 @@
       var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
       if (!pattern.test(email)) {
         console.log("Please enter a valid email address.")
-        // $("#error-msg").text("Please enter a valid email address.");
+       if ($("#error-msg").length == 0) {
+        $("<div>").attr("id", "error-msg").addClass("error-msg").text("Please enter a valid email address.").insertAfter("#email-input");
+      }
         $("#clear-email").prop("disabled", true);
       } else {
         console.log("Valid email")
-        // $("#error-msg").text("");
+            $("#error-msg").remove();
         $("#clear-email").prop("disabled", false);
       }
     });
