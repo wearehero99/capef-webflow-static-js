@@ -26,3 +26,8 @@
         });
 
 
+        function testWork(){
+            console.log("Iam loaded")
+        }
+
+
