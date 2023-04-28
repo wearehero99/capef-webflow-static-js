@@ -13,9 +13,16 @@
         $("#clear-email").prop("disabled", false);
       }
     });
+});
 
 
-    
-  });
+ const btn = document.getElementById("clear-email");
+
+        btn.addEventListener("click", function handleClick(event) {
+          event.preventDefault();
+
+          const emailInput = document.getElementById("email-input");
+          emailInput.value = "";
+        });
 
 
