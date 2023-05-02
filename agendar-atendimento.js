@@ -52,7 +52,10 @@
         const month = getElement("#mes-input").value
         const year = getElement("#year-input").value
 
-        
+        console.log(`date ====> ${day} ${month} ${yaer}`)
+            console.log(`DD: ${dd}`);
+            console.log(`Rest of number: ${rest}`);
+
        // Verify the values
         if (cpfInputValue && timeInputValue && planInputValue && emailInputValue && phoneValue) {
         // Split the phone value
