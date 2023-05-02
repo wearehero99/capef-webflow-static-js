@@ -1,4 +1,4 @@
-
+ var urlSchedule = "https://apiagendamento.capef.com.br"
 
       $(document).ready(function () {
         $("#phone-01").mask("(99) 9 9999-9999");
@@ -7,41 +7,68 @@
         $("#cpf-02").mask("999.999.999-99");
       });
 
+     
+      function getElement(selector) {
+        return document.querySelector(selector);
+      }
+
+      async function getTimes({day, year, month, atendimentoType}){
+        const response = fetch(`${urlSchedule}/agendamento/horarios/atendimento/${atendimentoType}/dia/${day}/mes/${month}/ano/${year}`)
+        const data = (await response).json()
+        console.log("getTimes Data ====>  ", data)
+        const horariosWithoutKeys = horariosArray.map(item => item.horarios);
+        // retorna os horarios como ["10:30"]
+        return horariosWithoutKeys
+      }
+
+
+      async function checkCPF(cpf){
+        const response = fetch(`${urlSchedule}/agendamento/validar/cpf/${cpf}`)
+        const data = (await response).json()
+        console.log("checkCPF Data ====>  ", data)
+      }
+
+      async function isAttendAlreadyExist({type, cpf}){
+        const response = fetch(`${urlSchedule}/agendamento/existe/atendimento/${type}/cpf/${cpf}`)
+        const data = (await response).json()
+        console.log("isAttendAlreadyExist Data ====>  ", data)
+      }
+
+
       function getElement(selector) {
         return document.querySelector(selector);
       }
 
       function createRegistration() {
+      
+      console.log("Agendamento")
+      
         const cpfInputValue = getElement("#cpf-01").value;
         const timeInputValue = getElement("#time-input").value;
         const planInputValue = getElement("#plan-input").value;
         const emailInputValue = getElement("#email-input").value;
         const assuntoInputValue = getElement("#assunto-input").value || null;
-        const day = getElement("#dia-input").value;
-        const month = getElement("#year-input").value;
-        const year = getElement("#mes-input").value;
+        const day = getElement("#dia-input").value
+        const month = getElement("#mes-input").value
+        const year = getElement("#year-input").value
 
-        console.log("timeInputValue ===> ",timeInputValue)
-
+        
+       // Verify the values
         if (cpfInputValue && timeInputValue && planInputValue && emailInputValue && phoneValue) {
- 
-            const dd = phoneValue.substring(0, 2);
-            const rest = phoneValue.substring(2);
+        // Split the phone value
+        const dd = phoneValue.substring(0, 2);
+        const rest = phoneValue.substring(2);
 
-
-
+            console.log(`date ====> ${day} ${month} ${yaer}`)
             console.log(`DD: ${dd}`);
             console.log(`Rest of number: ${rest}`);
             return;
-
-        } else {  
-
+            
+        } else {
+            
             console.log("One or more input values are missing.");
             return;
-
         }
-
-
 
         const dateInputValue = getElement("#date-input").value;
         console.log("🚀 ~ dateInputValue:", dateInputValue);
@@ -56,12 +83,16 @@
 
         const electronicService = getElement("#atendimento-eletronico-input");
         const personalAssistance = getElement("#atendimento-presencial-input");
-        const tipoAtendimento = personalAssistance.getAttributeNode("aria-selected").value ? 2 : 1;
+        const tipoAtendimento =
+          personalAssistance.getAttributeNode("aria-selected").value === "true"
+            ? 0
+            : electronicService.getAttributeNode("aria-selected").value ===
+                "true" && 1;
 
         const raw = {
           ano: year,
           dia: day,
-          mes: month,
+          mes: newDate.getMonth() + 1,
           plano: planInputValue,
           assunto: tipoAtendimento === 1 && assuntoInputValue,
           horario: timeInputValue,
@@ -78,4 +109,5 @@
         "click",
         createRegistration
       );
+      
     
