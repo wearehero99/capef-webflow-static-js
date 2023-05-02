@@ -1,3 +1,6 @@
+ import api from './api'
+ 
+ 
  var urlSchedule = "https://apiagendamento.capef.com.br"
 
       $(document).ready(function () {
@@ -13,23 +16,22 @@
       }
 
       async function getTimes({day, year, month, atendimentoType}){
-        const response = fetch(`${urlSchedule}/agendamento/horarios/atendimento/${atendimentoType}/dia/${day}/mes/${month}/ano/${year}`)
-        const data = (await response).json()
-        console.log("getTimes Data ====>  ", data)
-        const horariosWithoutKeys = horariosArray.map(item => item.horarios);
+        const response = api(`${urlSchedule}/agendamento/horarios/atendimento/${atendimentoType}/dia/${day}/mes/${month}/ano/${year}`)
+        const horariosWithoutKeys = response.map(item => item.horarios);
         // retorna os horarios como ["10:30"]
+        console.log(response)
         return horariosWithoutKeys
       }
 
 
       async function checkCPF(cpf){
-        const response = fetch(`${urlSchedule}/agendamento/validar/cpf/${cpf}`)
+        const response = api(`${urlSchedule}/agendamento/validar/cpf/${cpf}`)
         const data = (await response).json()
         console.log("checkCPF Data ====>  ", data)
       }
 
       async function isAttendAlreadyExist({type, cpf}){
-        const response = fetch(`${urlSchedule}/agendamento/existe/atendimento/${type}/cpf/${cpf}`)
+        const response = api(`${urlSchedule}/agendamento/existe/atendimento/${type}/cpf/${cpf}`)
         const data = (await response).json()
         console.log("isAttendAlreadyExist Data ====>  ", data)
       }
@@ -38,6 +40,19 @@
       function getElement(selector) {
         return document.querySelector(selector);
       }
+
+       $("#dia-input, #mes-input, #year-input").change(function() {
+            // Get the new input values
+            const day = $("#dia-input").val();
+            const month = $("#mes-input").val();
+            const year = $("#year-input").val();
+            const planInputValue = getElement("#plan-input").value;
+
+
+            getTimes({
+                day, year, month, atendimentoType: planInputValue
+            })
+        });
 
       function createRegistration() {
       
