@@ -17,6 +17,27 @@
         const planInputValue = getElement("#plan-input").value;
         const emailInputValue = getElement("#email-input").value;
         const assuntoInputValue = getElement("#assunto-input").value || null;
+        const day = getElement("#dia-input").value;
+        const month = getElement("#year-input").value;
+        const year = getElement("#mes-input").value;
+
+        if (cpfInputValue && timeInputValue && planInputValue && emailInputValue && phoneValue) {
+ 
+            const dd = phoneValue.substring(0, 2);
+            const rest = phoneValue.substring(2);
+
+            console.log(`DD: ${dd}`);
+            console.log(`Rest of number: ${rest}`);
+            return;
+
+        } else {  
+
+            console.log("One or more input values are missing.");
+            return;
+            
+        }
+
+
 
         const dateInputValue = getElement("#date-input").value;
         console.log("🚀 ~ dateInputValue:", dateInputValue);
