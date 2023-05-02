@@ -22,5 +22,3 @@ async function authFetch(url, options = {}) {
     console.error(error);
   }
 }
-
-export default authFetch
