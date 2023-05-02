@@ -44,7 +44,7 @@
       console.log("Agendamento createRegistration ")
       
         const cpfInputValue = getElement("#cpf-01").value;
-        const timeInputValue = getElement("#time-input-2").value;
+       // const timeInputValue = getElement("#time-input-2").value;
         const planInputValue = getElement("#plan-input").value;
         const emailInputValue = getElement("#email-input").value;
         // const assuntoInputValue = getElement("#assunto-input").value || null;
