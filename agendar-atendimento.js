@@ -21,10 +21,14 @@
         const month = getElement("#year-input").value;
         const year = getElement("#mes-input").value;
 
+        console.log("timeInputValue ===> ",timeInputValue)
+
         if (cpfInputValue && timeInputValue && planInputValue && emailInputValue && phoneValue) {
  
             const dd = phoneValue.substring(0, 2);
             const rest = phoneValue.substring(2);
+
+
 
             console.log(`DD: ${dd}`);
             console.log(`Rest of number: ${rest}`);
@@ -34,7 +38,7 @@
 
             console.log("One or more input values are missing.");
             return;
-            
+
         }
 
 
@@ -55,9 +59,9 @@
         const tipoAtendimento = personalAssistance.getAttributeNode("aria-selected").value ? 2 : 1;
 
         const raw = {
-          ano: newDate.getFullYear(),
-          dia: newDate.getDate(),
-          mes: newDate.getMonth() + 1,
+          ano: year,
+          dia: day,
+          mes: month,
           plano: planInputValue,
           assunto: tipoAtendimento === 1 && assuntoInputValue,
           horario: timeInputValue,
