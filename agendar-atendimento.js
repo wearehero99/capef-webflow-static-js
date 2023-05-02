@@ -47,7 +47,7 @@
         const timeInputValue = getElement("#time-input").value;
         const planInputValue = getElement("#plan-input").value;
         const emailInputValue = getElement("#email-input").value;
-        const assuntoInputValue = getElement("#assunto-input").value || null;
+        // const assuntoInputValue = getElement("#assunto-input").value || null;
         const day = getElement("#dia-input").value
         const month = getElement("#mes-input").value
         const year = getElement("#year-input").value
@@ -63,7 +63,7 @@
             console.log(`DD: ${dd}`);
             console.log(`Rest of number: ${rest}`);
             return;
-            
+
         } else {
             
             console.log("One or more input values are missing.");
