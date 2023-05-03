@@ -109,11 +109,7 @@ async function loadScript() {
                 .replace(/(\d{2})(\d{1})(\d{4})(\d{4})/, '($1) $2 $3-$4');
         });
 
-        phone02.addEventListener('input', function() {
-            this.value = this.value.replace(/\D/g, '')
-                .replace(/(\d{2})(\d{1})(\d{4})(\d{4})/, '($1) $2 $3-$4');
-        });
-
+      
         cpf01.addEventListener('input', function() {
             this.value = this.value.replace(/\D/g, '')
                 .replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
@@ -309,14 +305,19 @@ async function loadScript() {
 
         const planInput = document.getElementById("plan-input");
 
-        result.forEach(function(value, index) {
-            const option = document.createElement("option");
-            option.value = value.id;
-            option.text = value.descricao;
-            planInput.appendChild(option);
-        });
+        if(result.length){
 
-        planInput.value = result[0].id;
+            result.forEach(function(value, index) {
+                const option = document.createElement("option");
+                option.value = value.id;
+                option.text = value.descricao;
+                planInput.appendChild(option);
+            });
+
+            planInput.value = result[0].id;
+
+        }
+
     }
 
     getPlans()
