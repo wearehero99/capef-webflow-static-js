@@ -1,6 +1,3 @@
-
-   
-   
    async function setupToken() {
       let token = localStorage.getItem('authToken');
 
@@ -98,35 +95,12 @@ async function loadScript() {
       $(".w-form-fail").text("");
    }
 
-   const phone01Input = document.getElementById("phone-01");
-   const phone02Input = document.getElementById("phone-02");
-   const cpf01Input = document.getElementById("cpf-01");
-   const cpf02Input = document.getElementById("cpf-02");
-
-   const phoneMask = IMask(phone01Input, {
-      mask: "(00) 0 0000-0000",
-      lazy: false,
-      placeholderChar: "_"
+   $(document).ready(function () {
+      $("#phone-01").mask("(99) 9 9999-9999");
+      $("#phone-02").mask("(99) 9 9999-9999");
+      $("#cpf-01").mask("999.999.999-99");
+      $("#cpf-02").mask("999.999.999-99");
    });
-
-   const phoneMask2 = IMask(phone02Input, {
-      mask: "(00) 0 0000-0000",
-      lazy: false,
-      placeholderChar: "_"
-   });
-
-   const cpfMask = IMask(cpf01Input, {
-      mask: "000.000.000-00",
-      lazy: false,
-      placeholderChar: "_"
-   });
-
-   const cpfMask2 = IMask(cpf02Input, {
-      mask: "000.000.000-00",
-      lazy: false,
-      placeholderChar: "_"
-   });
-
 
 
    function getElement(selector) {
@@ -194,13 +168,13 @@ async function loadScript() {
       const currentDay = currentDate.getDate();
       const currentMonth = currentDate.getMonth() + 1; // January is 0
       const currentYear = currentDate.getFullYear();
-      const planInputValue = getElement("#plan-input").value;
+      const planInputValue = getElement("#plan-input, #plan-input-2").value;
 
 
       // Set the default values for the input fields
-      $("#dia-input").val(currentDay);
-      $("#mes-input").val(currentMonth);
-      $("#year-input").val(currentYear);
+      $("#dia-input, #dia-input-2 ").val(currentDay);
+      $("#mes-input, #mes-input-2").val(currentMonth);
+      $("#year-input, #year-input-2").val(currentYear);
 
       getTimes({
          day: currentDay,
@@ -234,15 +208,15 @@ async function loadScript() {
    async function scheduleAttend(data) {
 
       clearError()
-      $("#atendimento-presencial-submit").prop("disabled", true);
-      $("#atendimento-presencial-submit").text("carregando...");
+      $("#atendimento-presencial-submit, #atendimento-eletronico-submit").prop("disabled", true);
+      $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("carregando...");
 
       const response = await api(`${urlSchedule}/agendamento/criar`, {
          method: "POST",
          body: JSON.stringify(data)
       })
 
-      $("#atendimento-presencial-submit").prop("disabled", false);
+      $("#atendimento-presencial-submit, #atendimento-eletronico-submit").prop("disabled", false);
 
       if (response.status === 200) {
          $("#email-form02").css("display", "none")
@@ -256,13 +230,13 @@ async function loadScript() {
    }
 
 
-   $("#dia-input, #mes-input, #year-input, #plan-input").change(function () {
+   $("#dia-input, #mes-input, #year-input, #plan-input, #dia-input-2, #mes-input-2, #year-input-2, #plan-input-2").change(function () {
       clearError()
       // Get the new input values
       const day = $("#dia-input").val();
       const month = $("#mes-input").val();
       const year = $("#year-input").val();
-      const planInputValue = getElement("#plan-input").value;
+      const planInputValue = getElement("#plan-input-2").value;
 
 
       getTimes({
@@ -275,15 +249,13 @@ async function loadScript() {
 
    let tipoAtendimento = 0
 
-   const electronicService = getElement("#atendimento-eletronico-input");
-   const personalAssistance = getElement("#atendimento-presencial-input");
 
-   $("#atendimento-eletronico-input").click(function () {
+   $("#atendimento-eletronico-input, #atendimento-eletronico-submit").click(function () {
       console.log("tipoAtendimento", 1)
       tipoAtendimento = 1
    });
 
-   $("#atendimento-presencial-input").click(function () {
+   $("#atendimento-presencial-input, #atendimento-eletronico-submit").click(function () {
       console.log("tipoAtendimento", 0)
       tipoAtendimento = 0
    });
@@ -294,7 +266,7 @@ async function loadScript() {
       const result = response
 
 
-      const planInput = $("#plan-input");
+      const planInput = $("#plan-input, #plan-input-2");
 
       $.each(result, function (index, value) {
          planInput.append("<option value='" + value.id + "'>" + value.descricao + "</option>");
@@ -305,21 +277,21 @@ async function loadScript() {
 
    getPlans()
 
-   $("#dia-input, #mes-input, #year-input, #plan-input, #phone-01, #time-input-2, #email-input, #assunto-input").change(function () {
+   $("#dia-input, #mes-input, #year-input, #plan-input,#mes-input-2, #year-input-2, #plan-input-2, #phone-01,#phone-02, #time-input-2, #email-input,#email-input-2, #assunto-input").change(function () {
       clearError()
    })
 
    async function createRegistration() {
       clearError()
-      const phoneValue = getElement("#phone-01").value;
-      const cpfInputValue = getElement("#cpf-01").value;
-      const timeInputValue = getElement("#time-input-2").value;
-      const planInputValue = getElement("#plan-input").value;
-      const emailInputValue = getElement("#email-input").value;
+      const phoneValue = getElement(tipoAtendimento ===0 ?  "#phone-01" :"#phone-02").value;
+      const cpfInputValue = getElement(tipoAtendimento === 0 ? "#cpf-01": "#cpf-02").value;
+      const timeInputValue = getElement(tipoAtendimento === 0 ? "#time-input-2": "#horario-2").value;
+      const planInputValue = getElement(tipoAtendimento === 0 ? "#plan-input": "#plan-input-2").value;
+      const emailInputValue = getElement(tipoAtendimento === 0 ? "#email-input": "#email-input-2").value;
       const assuntoInputValue = getElement("#assunto-input") ? getElement("#assunto-input").value : "";
-      const day = getElement("#dia-input").value
-      const month = getElement("#mes-input").value
-      const year = getElement("#year-input").value
+      const day = getElement(tipoAtendimento === 0 ? "#dia-input": "#dia-input-2").value
+      const month = getElement(tipoAtendimento === 0 ? "#mes-input": "#mes-input-2").value
+      const year = getElement(tipoAtendimento === 0 ? "#year-input": "#year-input-2").value
       const phoneDDD = phoneValue.replace("(", "").replace(")", "").substring(0, 3);
       const phoneRest = phoneValue.replace("(", "").replace(")", "").substring(3);
 
@@ -366,14 +338,11 @@ async function loadScript() {
 
    }
 
-   getElement("#atendimento-presencial-submit").addEventListener(
+   getElement("#atendimento-presencial-submit, #atendimento-eletronico-submit").addEventListener(
       "click",
       createRegistration
    );
 
-
 }
 
-
 loadScript()
-
