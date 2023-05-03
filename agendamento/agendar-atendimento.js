@@ -25,7 +25,7 @@
    }
 
 async function loadScript() {
-
+    let tipoAtendimento = 0
    await setupToken()
 
    async function authFetch(url, options = {}) {
@@ -168,7 +168,7 @@ async function loadScript() {
       const currentDay = currentDate.getDate();
       const currentMonth = currentDate.getMonth() + 1; // January is 0
       const currentYear = currentDate.getFullYear();
-      const planInputValue = getElement("#plan-input, #plan-input-2").value;
+      const planInputValue = getElement(tipoAtendimento  === 0 ? "#plan-input":"#plan-input-2").value;
 
 
       // Set the default values for the input fields
@@ -236,7 +236,7 @@ async function loadScript() {
       const day = $("#dia-input").val();
       const month = $("#mes-input").val();
       const year = $("#year-input").val();
-      const planInputValue = getElement("#plan-input-2").value;
+      const planInputValue = getElement(tipoAtendimento  === 0 ? "#plan-input":"#plan-input-2").value;
 
 
       getTimes({
@@ -247,7 +247,7 @@ async function loadScript() {
       })
    })
 
-   let tipoAtendimento = 0
+   
 
 
    $("#atendimento-eletronico-input, #atendimento-eletronico-submit").click(function () {
@@ -338,7 +338,7 @@ async function loadScript() {
 
    }
 
-   getElement("#atendimento-presencial-submit, #atendimento-eletronico-submit").addEventListener(
+   getElement("#atendimento-presencial-submit").addEventListener(
       "click",
       createRegistration
    );
