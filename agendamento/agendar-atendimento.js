@@ -345,7 +345,7 @@ async function loadScript() {
 
    getElement("#atendimento-eletronico-submit").addEventListener(
       "click",
-      createRegistration
+      ()=> { console.log("#atendimento-eletronico-submit") }
    );
 
 }
