@@ -100,7 +100,6 @@ async function loadScript() {
 
     window.addEventListener('DOMContentLoaded', function() {
         const phone01 = document.querySelector('#phone-01');
-        const phone02 = document.querySelector('#phone-02');
         const cpf01 = document.querySelector('#cpf-01');
         const cpf02 = document.querySelector('#cpf-02');
 
