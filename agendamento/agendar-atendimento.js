@@ -1,4 +1,71 @@
+function IMask(element, maskOptions) {
+  const input = element instanceof HTMLInputElement ? element : element.querySelector('input[type="text"]');
+  if (!input) return;
 
+  const mask = maskOptions.mask || "";
+  const placeholderChar = maskOptions.placeholderChar || "_";
+  const lazy = maskOptions.lazy || false;
+
+  let value = input.value;
+  let oldValue = value;
+  let selectionStart = 0;
+  let selectionEnd = 0;
+
+  function update() {
+    const maskedValue = applyMask(value, mask, placeholderChar);
+    const selection = getSelection(input, selectionStart, selectionEnd);
+    input.value = maskedValue;
+    setSelection(input, selection.start, selection.end);
+  }
+
+  function applyMask(value, mask, placeholderChar) {
+    let maskedValue = "";
+    let j = 0;
+
+    for (let i = 0; i < mask.length; i++) {
+      if (j >= value.length) break;
+      if (mask[i] === placeholderChar) {
+        maskedValue += value[j];
+        j++;
+      } else {
+        maskedValue += mask[i];
+      }
+    }
+
+    return maskedValue;
+  }
+
+  function getSelection(input, start, end) {
+    if (typeof input.selectionStart !== "undefined") {
+      return {
+        start: input.selectionStart + start,
+        end: input.selectionEnd + end
+      };
+    }
+    return null;
+  }
+
+  function setSelection(input, start, end) {
+    if (typeof input.selectionStart !== "undefined") {
+      input.selectionStart = start;
+      input.selectionEnd = end;
+    }
+  }
+
+  input.addEventListener("input", (event) => {
+    oldValue = value;
+    value = event.target.value;
+    selectionStart = event.target.selectionStart - oldValue.length + value.length;
+    selectionEnd = event.target.selectionEnd - oldValue.length + value.length;
+    update();
+  });
+
+  if (!lazy) {
+    update();
+  }
+}
+   
+   
    async function setupToken() {
     let token = localStorage.getItem('authToken');
 
@@ -98,27 +165,36 @@ async function loadScript() {
         wFormFail.textContent = '';
     }
 
-    window.addEventListener('DOMContentLoaded', function() {
-        const phone01 = document.querySelector('#phone-01');
-        const cpf01 = document.querySelector('#cpf-01');
-        const cpf02 = document.querySelector('#cpf-02');
+    const phone01Input = document.getElementById("phone-01");
+   const phone02Input = document.getElementById("phone-02");
+   const cpf01Input = document.getElementById("cpf-01");
+   const cpf02Input = document.getElementById("cpf-02");
 
-        phone01.addEventListener('input', function() {
-            this.value = this.value.replace(/\D/g, '')
-                .replace(/(\d{2})(\d{1})(\d{4})(\d{4})/, '($1) $2 $3-$4');
-        });
+   const phoneMask = IMask(phone01Input, {
+      mask: "(00) 0 0000-0000",
+      lazy: false,
+      placeholderChar: "_"
+   });
 
-      
-        cpf01.addEventListener('input', function() {
-            this.value = this.value.replace(/\D/g, '')
-                .replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-        });
+   const phoneMask2 = IMask(phone02Input, {
+      mask: "(00) 0 0000-0000",
+      lazy: false,
+      placeholderChar: "_"
+   });
 
-        cpf02.addEventListener('input', function() {
-            this.value = this.value.replace(/\D/g, '')
-                .replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-        });
-    });
+   const cpfMask = IMask(cpf01Input, {
+      mask: "000.000.000-00",
+      lazy: false,
+      placeholderChar: "_"
+   });
+
+   const cpfMask2 = IMask(cpf02Input, {
+      mask: "000.000.000-00",
+      lazy: false,
+      placeholderChar: "_"
+   });
+
+
 
 
     function getElement(selector) {
