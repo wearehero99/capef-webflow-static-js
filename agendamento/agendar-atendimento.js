@@ -165,8 +165,7 @@ async function loadScript() {
         wFormFail.textContent = '';
     }
 
-    const phone01Input = document.getElementById("phone-01");
-   const phone02Input = document.getElementById("phone-02");
+const phone01Input = document.getElementById("phone-01");
    const cpf01Input = document.getElementById("cpf-01");
    const cpf02Input = document.getElementById("cpf-02");
 
@@ -176,11 +175,7 @@ async function loadScript() {
       placeholderChar: "_"
    });
 
-   const phoneMask2 = IMask(phone02Input, {
-      mask: "(00) 0 0000-0000",
-      lazy: false,
-      placeholderChar: "_"
-   });
+  
 
    const cpfMask = IMask(cpf01Input, {
       mask: "000.000.000-00",
