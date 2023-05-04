@@ -1,4 +1,4 @@
- let tipoAtendimento = 0
+ let tipoAtendimento = 1
 
     async function setupToken() {
         let token = localStorage.getItem('authToken');
@@ -25,6 +25,7 @@
             localStorage.setItem('authToken', token);
         }
     }
+
 
     async function authFetch(url, options = {}) {
         try {
@@ -83,8 +84,8 @@
         $(".w-form-fail").text("");
     }
 
-    const api = authFetch
 
+    const api = authFetch
 
     var urlSchedule = "https://apiagendamento.capef.com.br"
     var urlCalend = "https://apiagendamento.capef.com.br"
@@ -113,16 +114,13 @@
         return document.querySelector(selector);
     }
 
+
    async function getPlans() {
             const response = await api(`${urlSchedule}/plano`)
             const result = response
 
-
             const planInput = $("#plan-input");
             const planInput2 = $("#plan-input-2");
-
-       
-
 
             $.each(result, function (index, value) {
                 planInput.append("<option value='" + value.id + "'>" + value.descricao + "</option>");
@@ -289,18 +287,18 @@
 
         $("#atendimento-eletronico-input").click(async function () {
             clearError()
-                   addMask()
+            addMask()
 
             await getPlans()
-            tipoAtendimento = 1
+            tipoAtendimento = 2
         });
 
         $("#atendimento-presencial-input").click(async function () {
             clearError()
-                   addMask()
+            addMask()
 
             await getPlans()
-            tipoAtendimento = 0
+            tipoAtendimento = 1
         });
 
 
