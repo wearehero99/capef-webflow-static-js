@@ -367,5 +367,5 @@ document.querySelector("#atendimento-presencial-submit").addEventListener(
 
 document.querySelector("#atendimento-eletronico-submit").addEventListener(
       "click",
-      ()=> console.log("Hello electronico")
+      ()=> {console.log("Hello electronico")}
 )
