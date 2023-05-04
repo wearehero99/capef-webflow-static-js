@@ -103,7 +103,10 @@
 
 
     $(document).ready(function ($) {
-       addMask()
+       $("#phone-01").mask("(99) 9 9999-9999");
+        $("#phone-02").mask("(99) 9 9999-9999");
+        $("#cpf-01").mask("999.999.999-99");
+        $("#cpf-02").mask("999.999.999-99");
     });
 
     function getElement(selector) {
