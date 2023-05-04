@@ -121,7 +121,7 @@
             const planInput = $("#plan-input");
             const planInput2 = $("#plan-input-2");
 
-            console.log("Plans ===> ",response,  result)
+       
 
 
             $.each(result, function (index, value) {
@@ -143,7 +143,6 @@
 
         const attId = atendimentoType
 
-        console.log("atendimentoType", atendimentoType)
 
         try {
             const response = await
@@ -197,19 +196,18 @@
         const currentDay = currentDate.getDate();
         const currentMonth = currentDate.getMonth() + 1; // January is 0
         const currentYear = currentDate.getFullYear();
-        const planInputValue = getElement(tipoAtendimento === 0 ? "#plan-input" : "#plan-input-2").value;
-
+        
 
         // Set the default values for the input fields
-        $("#dia-input, #dia-input-2 ").val(currentDay);
-        $("#mes-input, #mes-input-2").val(currentMonth);
-        $("#year-input, #year-input-2").val(currentYear);
+        $(tipoAtendimento === 0 ? "#dia-input": "#dia-input-2 ").val(currentDay);
+        $(tipoAtendimento === 0 ? "#mes-input": "#mes-input-2").val(currentMonth);
+        $(tipoAtendimento === 0 ? "#year-input": "#year-input-2").val(currentYear);
 
         getTimes({
             day: currentDay,
             year: currentYear,
             month: currentMonth,
-            atendimentoType: planInputValue
+            atendimentoType: tipoAtendimento
         })
     }
 
