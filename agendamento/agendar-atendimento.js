@@ -197,9 +197,9 @@
         
 
         // Set the default values for the input fields
-        $(tipoAtendimento === 0 ? "#dia-input": "#dia-input-2 ").val(currentDay);
-        $(tipoAtendimento === 0 ? "#mes-input": "#mes-input-2").val(currentMonth);
-        $(tipoAtendimento === 0 ? "#year-input": "#year-input-2").val(currentYear);
+        $(tipoAtendimento === 1 ? "#dia-input": "#dia-input-2 ").val(currentDay);
+        $(tipoAtendimento === 1 ? "#mes-input": "#mes-input-2").val(currentMonth);
+        $(tipoAtendimento === 1 ? "#year-input": "#year-input-2").val(currentYear);
 
         getTimes({
             day: currentDay,
@@ -267,17 +267,16 @@
             clearError()
             // Get the new input values
 
-            const day = $(tipoAtendimento === 0 ? "#dia-input" : "#dia-input-2").val();
-            const month = $(tipoAtendimento === 0 ? "#mes-input" : "#mes-input-2").val();
-            const year = $(tipoAtendimento === 0 ? "#year-input" : "#year-input-2").val();
-            const planInputValue = getElement(tipoAtendimento === 0 ? "#plan-input" : "#plan-input-2").value;
-
+            const day = $(tipoAtendimento === 1 ? "#dia-input" : "#dia-input-2").val();
+            const month = $(tipoAtendimento === 1 ? "#mes-input" : "#mes-input-2").val();
+            const year = $(tipoAtendimento === 1 ? "#year-input" : "#year-input-2").val();
+           
 
             getTimes({
                 day,
                 year,
                 month,
-                atendimentoType: planInputValue
+                atendimentoType: tipoAtendimento
             })
 
         })
@@ -318,15 +317,15 @@
 
     async function createRegistration() {
         clearError()
-        const phoneValue = getElement(tipoAtendimento === 0 ? "#phone-01" : "#phone-02").value;
-        const cpfInputValue = getElement(tipoAtendimento === 0 ? "#cpf-01" : "#cpf-02").value;
-        const timeInputValue = getElement(tipoAtendimento === 0 ? "#time-input-2" : "#horario-2").value;
-        const planInputValue = getElement(tipoAtendimento === 0 ? "#plan-input" : "#plan-input-2").value;
-        const emailInputValue = getElement(tipoAtendimento === 0 ? "#email-input" : "#email-input-2").value;
+        const phoneValue = getElement(tipoAtendimento === 1 ? "#phone-01" : "#phone-02").value;
+        const cpfInputValue = getElement(tipoAtendimento === 1 ? "#cpf-01" : "#cpf-02").value;
+        const timeInputValue = getElement(tipoAtendimento === 1 ? "#time-input-2" : "#horario-2").value;
+        const planInputValue = getElement(tipoAtendimento === 1 ? "#plan-input" : "#plan-input-2").value;
+        const emailInputValue = getElement(tipoAtendimento === 1 ? "#email-input" : "#email-input-2").value;
         const assuntoInputValue = getElement("#assunto-input") ? getElement("#assunto-input").value : "";
-        const day = getElement(tipoAtendimento === 0 ? "#dia-input" : "#dia-input-2").value
-        const month = getElement(tipoAtendimento === 0 ? "#mes-input" : "#mes-input-2").value
-        const year = getElement(tipoAtendimento === 0 ? "#year-input" : "#year-input-2").value
+        const day = getElement(tipoAtendimento === 1 ? "#dia-input" : "#dia-input-2").value
+        const month = getElement(tipoAtendimento === 1 ? "#mes-input" : "#mes-input-2").value
+        const year = getElement(tipoAtendimento === 1 ? "#year-input" : "#year-input-2").value
         const phoneDDD = phoneValue.replace("(", "").replace(")", "").substring(0, 3);
         const phoneRest = phoneValue.replace("(", "").replace(")", "").substring(3);
 
