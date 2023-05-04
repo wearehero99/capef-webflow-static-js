@@ -134,13 +134,6 @@
                                         name="time-input-2" data-name="Time Input 2" required=""
                                         class="c-text-field w-select">
                                         <option value="Another option">--:--</option>
-                                        <option value="09:00">09:00</option>
-                                        <option value="10:00">10:00</option>
-                                        <option value="11:00">11:00</option>
-                                        <option value="12:00">12:00</option>
-                                        <option value="13:00">13:00</option>
-                                        <option value="14:00">14:00</option>
-                                        <option value="15:00">15:00</option>
                                     </select></div>
                             </div>
                         </div>
@@ -151,7 +144,7 @@
                                         class="c-text-field w-input" maxlength="256" name="email" data-name="email"
                                         placeholder="Insira seu e-mail" id="email-input" required=""></div>
                                 <div class="c-input-tab"><label for="phone-01" class="c-text cc-field-header">DDD +
-                                        Telefone</label><input type="text" class="c-text-field w-input" maxlength="16"
+                                        Telefone</label><input type="text" class="c-text-field w-input" maxlength="256"
                                         name="phone" data-name="phone" placeholder="Insira seu telefone " id="phone-01"
                                         required=""></div>
                             </div>
@@ -160,7 +153,7 @@
                             <div class="input-grid">
                                 <div class="c-input-tab"><label for="cpf-01"
                                         class="c-text cc-field-header">CPF</label><input type="text"
-                                        class="c-text-field w-input" maxlength="14" name="phone02" data-name="phone02"
+                                        class="c-text-field w-input" maxlength="256" name="phone02" data-name="phone02"
                                         placeholder="Insira seu CPF" id="cpf-01" required=""></div>
                                 <div class="c-input-tab"></div>
                                 <div id="w-node-ea406dc6-0438-1eb8-0229-f187adca1535-2f5a80dc"
@@ -173,8 +166,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-button-box"><button id="atendimento-presencial-submit"
-                                class="button-6 button-full w-button">Enviar</button></div>
+                        <div class="tab-button-box"><a id="atendimento-presencial-submit"
+                                class="button-6 button-full w-button">Enviar</a></div>
                     </form>
                     <div class="w-form-done" tabindex="-1" role="region" aria-label="Email Form success">
                         <div>Thank you! Your submission has been received!</div>
@@ -195,7 +188,8 @@
                 <div class="w-form">
                     <div class="padding-small"></div>
                     <div class="padding-small"></div>
-                    <form id="email-form02" class="solicitation-form-2" aria-label="Email Form">
+                    <form id="email-form02" name="email-form" data-name="Email Form" method="get"
+                        class="solicitation-form-2" aria-label="Email Form">
                         <div class="c-input-form">
                             <div class="input-grid _3fr">
                                 <div class="c-input-tab"><label for="dia-input-2"
@@ -251,8 +245,8 @@
                                         <option value="11">Novembro</option>
                                         <option value="12">Dezembro</option>
                                     </select></div>
-                                <div class="c-input-tab"><label for="year-input"
-                                        class="c-text cc-field-header">Ano</label><select id="year-input"
+                                <div class="c-input-tab"><label for="year-input-2"
+                                        class="c-text cc-field-header">Ano</label><select id="year-input-2"
                                         name="time-input-3" data-name="Time Input 3" required=""
                                         class="c-text-field w-select">
                                         <option value="2023">2023</option>
@@ -282,10 +276,8 @@
                             <div class="input-grid _2fr">
                                 <div class="c-input-tab"><label for="plan-input-2"
                                         class="c-text cc-field-header">Plano</label><select id="plan-input-2"
-                                        name="plano" data-name="plano" required="" class="c-text-field w-select">
-                                        <option value="1">Plano BD</option>
-                                        <option value="2">Plano CV I</option>
-                                    </select></div>
+                                        name="plano" data-name="plano" required=""
+                                        class="c-text-field w-select"></select></div>
                                 <div class="c-input-tab"><label for="horario-2"
                                         class="c-text cc-field-header">Horário</label><select id="horario-2"
                                         name="horario" data-name="horario" required="" class="c-text-field w-select">
@@ -300,7 +292,7 @@
                                         class="c-text-field w-input" maxlength="256" name="email" data-name="email"
                                         placeholder="Insira seu e-mail" id="email-input-2" required=""></div>
                                 <div class="c-input-tab"><label for="phone-02" class="c-text cc-field-header">DDD +
-                                        Telefone</label><input type="text" class="c-text-field w-input" maxlength="16"
+                                        Telefone</label><input type="text" class="c-text-field w-input" maxlength="256"
                                         name="phone-2" data-name="Phone 2" placeholder="Insira seu telefone "
                                         id="phone-02" required=""></div>
                             </div>
@@ -309,7 +301,7 @@
                             <div class="input-grid">
                                 <div class="c-input-tab"><label for="cpf-02"
                                         class="c-text cc-field-header">CPF</label><input type="text"
-                                        class="c-text-field w-input" maxlength="14" name="phone02" data-name="phone02"
+                                        class="c-text-field w-input" maxlength="256" name="phone02" data-name="phone02"
                                         placeholder="Insira seu CPF" id="cpf-02" required=""></div>
                                 <div class="c-input-tab"></div>
                                 <div id="w-node-_05baabee-d14f-0157-dcca-c19118bc6941-2f5a80dc"
@@ -322,21 +314,31 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-button-box"><button id="atendimento-eletronico-submit"
-                                class="button-6 button-full w-button">Enviar</button></div>
+                        <div class="tab-button-box"><a id="atendimento-eletronico-submit"
+                                class="button-6 button-full w-button">Enviar</a></div>
                     </form>
                     <div class="w-form-done" tabindex="-1" role="region" aria-label="Email Form success">
                         <div>Thank you! Your submission has been received!</div>
                     </div>
-                    <div class="w-form-fail" tabindex="-1" role="region" aria-label="Email Form failure"
-                        style="display: none;"></div>
+                    <div class="w-form-fail" tabindex="-1" role="region" aria-label="Email Form failure">
+                        <div>Oops! Something went wrong while submitting the form.</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+    integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
 <script>
+
+    let tipoAtendimento = 0
+
     async function setupToken() {
         let token = localStorage.getItem('authToken');
 
@@ -363,219 +365,226 @@
         }
     }
 
-    async function loadScript() {
+    async function authFetch(url, options = {}) {
+        try {
+            let token = localStorage.getItem('authToken');
 
-        await setupToken()
+            const headers = {
+                ...options.headers,
+                "Authorization": `Bearer ${token}`
+            };
 
-        async function authFetch(url, options = {}) {
-            try {
-                let token = localStorage.getItem('authToken');
+            const dataResponse = await fetch(url, {
+                ...options,
+                headers
+            });
 
-                const headers = {
-                    ...options.headers,
-                    "Authorization": `Bearer ${token}`
-                };
+            if (dataResponse.status === 401) {
+                localStorage.removeItem("authToken")
+                await setupToken()
+                getTimesOfToday()
+            }
 
-                const dataResponse = await fetch(url, {
-                    ...options,
-                    headers
-                });
 
-                if (dataResponse.status === 401) {
-                    localStorage.removeItem("authToken")
-                    await setupToken()
-                    getTimesOfToday()
+            if (dataResponse.status === 204) {
+                return {
+                    status: dataResponse.status
                 }
+            }
 
 
-                if (dataResponse.status === 204) {
+            if (!dataResponse.ok) {
+                if (await dataResponse.json()) {
+                    const result = await dataResponse.json()
+
+                    return {
+                        error: result[0],
+                        status: dataResponse.status
+                    }
+                } else {
+
                     return {
                         status: dataResponse.status
                     }
                 }
-
-
-                if (!dataResponse.ok) {
-                    if (await dataResponse.json()) {
-                        const result = await dataResponse.json()
-
-                        return {
-                            error: result[0],
-                            status: dataResponse.status
-                        }
-                    } else {
-
-                        return {
-                            status: dataResponse.status
-                        }
-                    }
-                }
-
-                const data = await dataResponse.json();
-                return data;
-            } catch (error) {
-                return error
             }
+
+            const data = await dataResponse.json();
+            return data;
+        } catch (error) {
+            return error
         }
-
-        const api = authFetch
-
-
-        var urlSchedule = "https://apiagendamento.capef.com.br"
-        var urlCalend = "https://apiagendamento.capef.com.br"
-
-        function showFormFailMessage(message) {
-            $(".w-form-fail").css("display", "block");
-            $(".w-form-fail").text(message);
-        }
-
-        function clearError() {
-            $(".w-form-fail").css("display", "none");
-            $(".w-form-fail").text("");
-        }
-
-        $(document).ready(function () {
-            $("#phone-01").mask("(99) 9 9999-9999");
-            $("#phone-02").mask("(99) 9 9999-9999");
-            $("#cpf-01").mask("999.999.999-99");
-            $("#cpf-02").mask("999.999.999-99");
-        });
+    }
 
 
-        function getElement(selector) {
-            return document.querySelector(selector);
-        }
+    function clearError() {
+        $(".w-form-fail").css("display", "none");
+        $(".w-form-fail").text("");
+    }
 
-        async function getTimes({
-            day,
-            year,
-            month,
-            atendimentoType
-        }) {
+    const api = authFetch
 
-            const attId = atendimentoType
 
-            try {
-                const response = await
-                    api(`${urlCalend}/horarios/atendimento/${attId}/dia/${day}/mes/${month}/ano/${year}`)
-                const data = response
+    var urlSchedule = "https://apiagendamento.capef.com.br"
+    var urlCalend = "https://apiagendamento.capef.com.br"
 
-                if (data.status === 204) {
-                    //Sem horarios
-                    showFormFailMessage("Sem horarios disponível para está data")
+    function showFormFailMessage(message) {
+        $(".w-form-fail").css("display", "block");
+        $(".w-form-fail").text(message);
+    }
 
+
+    $(document).ready(function ($) {
+        $("#phone-01").mask("(99) 9 9999-9999");
+        $("#phone-02").mask("(99) 9 9999-9999");
+        $("#cpf-01").mask("999.999.999-99");
+        $("#cpf-02").mask("999.999.999-99");
+    });
+
+    function getElement(selector) {
+        return document.querySelector(selector);
+    }
+
+
+    async function getTimes({
+        day,
+        year,
+        month,
+        atendimentoType
+    }) {
+
+        const attId = atendimentoType
+
+        try {
+            const response = await
+                api(`${urlCalend}/horarios/atendimento/${attId}/dia/${day}/mes/${month}/ano/${year}`)
+            const data = response
+
+            if (data.status === 204) {
+                //Sem horarios
+                showFormFailMessage("Sem horarios disponível para está data")
+
+                return;
+            } else {
+                if (data.error) {
+                    //Chamar o erro aqui e mostra a mensagem de erro.
+                    console.log("error ===> ", data.error)
                     return;
-                } else {
-                    if (data.error) {
-                        //Chamar o erro aqui e mostra a mensagem de erro.
-                        console.log("error ===> ", data.error)
-                        return;
-                    }
-                    clearError()
-
-                    if (data.length) {
-                        const horariosWithoutKeys = data.map(item => item.horarios);
-
-                        const timeInput = $("#time-input-2");
-
-
-                        $.each(horariosWithoutKeys, function (index, value) {
-                            timeInput.append("<option value='" + value + "'>" + value + "</option>");
-                        });
-
-                        timeInput.val(horariosWithoutKeys[0]);
-                    }
                 }
+                clearError()
 
-            } catch (error) {
-                console.log(error)
+                if (data.length) {
+                    const horariosWithoutKeys = data.map(item => item.horarios);
+
+                    const timeInput = $("#time-input-2");
+
+
+                    $.each(horariosWithoutKeys, function (index, value) {
+                        timeInput.append("<option value='" + value + "'>" + value + "</option>");
+                    });
+
+                    timeInput.val(horariosWithoutKeys[0]);
+                }
             }
 
+        } catch (error) {
+            console.log(error)
         }
 
+    }
 
-        async function checkCPF(cpf) {
-            const response = await api(`${urlSchedule}/agendamento/validar/cpf/${cpf}`)
+    async function checkCPF(cpf) {
+        const response = await api(`${urlSchedule}/agendamento/validar/cpf/${cpf}`)
+        const data = (await response).json()
+        console.log("checkCPF Data ====> ", data)
+    }
+
+
+    async function getTimesOfToday() {
+        const currentDate = new Date();
+
+        // Get the current day, month, and year
+        const currentDay = currentDate.getDate();
+        const currentMonth = currentDate.getMonth() + 1; // January is 0
+        const currentYear = currentDate.getFullYear();
+        const planInputValue = getElement(tipoAtendimento === 0 ? "#plan-input" : "#plan-input-2").value;
+
+
+        // Set the default values for the input fields
+        $("#dia-input, #dia-input-2 ").val(currentDay);
+        $("#mes-input, #mes-input-2").val(currentMonth);
+        $("#year-input, #year-input-2").val(currentYear);
+
+        getTimes({
+            day: currentDay,
+            year: currentYear,
+            month: currentMonth,
+            atendimentoType: planInputValue
+        })
+    }
+
+
+    async function isAttendAlreadyExist({
+        typeAtt,
+        cpf
+    }) {
+        const response = await api(`${urlSchedule}/agendamento/existe/atendimento/${typeAtt}/cpf/${cpf}`)
+        const result = response
+
+        if (result.status === 204) {
+            clearError()
+            //show the error msg
+            showFormFailMessage("Não existe agendamento gravados que atendem aos parâmetros passados.")
+            return false;
+        } else {
             const data = (await response).json()
-            console.log("checkCPF Data ====> ", data)
+            return true
         }
 
-        async function getTimesOfToday() {
-            const currentDate = new Date();
+    }
 
-            // Get the current day, month, and year
-            const currentDay = currentDate.getDate();
-            const currentMonth = currentDate.getMonth() + 1; // January is 0
-            const currentYear = currentDate.getFullYear();
-            const planInputValue = getElement("#plan-input, #plan-input-2").value;
+    async function scheduleAttend(data) {
 
+        clearError()
+        $("#atendimento-presencial-submit, #atendimento-eletronico-submit").prop("disabled", true);
+        $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("carregando...");
 
-            // Set the default values for the input fields
-            $("#dia-input, #dia-input-2 ").val(currentDay);
-            $("#mes-input, #mes-input-2").val(currentMonth);
-            $("#year-input, #year-input-2").val(currentYear);
+        const response = await api(`${urlSchedule}/agendamento/criar`, {
+            method: "POST",
+            body: JSON.stringify(data)
+        })
 
-            getTimes({
-                day: currentDay,
-                year: currentYear,
-                month: currentMonth,
-                atendimentoType: planInputValue
-            })
+        $("#atendimento-presencial-submit, #atendimento-eletronico-submit").prop("disabled", false);
+
+        if (response.status === 200) {
+            $("#email-form02").css("display", "none")
+            $(".w-form-done").css("display", "block");
         }
+    }
+
+    function getElement(selector) {
+        return document.querySelector(selector);
+    }
+
+
+    async function loadScript() {
+
+
+        await setupToken()
+
+
 
         getTimesOfToday()
-
-        async function isAttendAlreadyExist({
-            typeAtt,
-            cpf
-        }) {
-            const response = await api(`${urlSchedule}/agendamento/existe/atendimento/${typeAtt}/cpf/${cpf}`)
-            const result = response
-
-            if (result.status === 204) {
-                clearError()
-                //show the error msg
-                showFormFailMessage("Não existe agendamento gravados que atendem aos parâmetros passados.")
-                return false;
-            } else {
-                const data = (await response).json()
-                return true
-            }
-
-        }
-
-        async function scheduleAttend(data) {
-
-            clearError()
-            $("#atendimento-presencial-submit, #atendimento-eletronico-submit").prop("disabled", true);
-            $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("carregando...");
-
-            const response = await api(`${urlSchedule}/agendamento/criar`, {
-                method: "POST",
-                body: JSON.stringify(data)
-            })
-
-            $("#atendimento-presencial-submit, #atendimento-eletronico-submit").prop("disabled", false);
-
-            if (response.status === 200) {
-                $("#email-form02").css("display", "none")
-                $(".w-form-done").css("display", "block");
-            }
-        }
-
-
-        function getElement(selector) {
-            return document.querySelector(selector);
-        }
 
 
         $("#dia-input, #mes-input, #year-input, #plan-input, #dia-input-2, #mes-input-2, #year-input-2, #plan-input-2").change(function () {
             clearError()
             // Get the new input values
-            const day = $("#dia-input").val();
-            const month = $("#mes-input").val();
-            const year = $("#year-input").val();
-            const planInputValue = getElement("#plan-input-2").value;
+
+            const day = $(tipoAtendimento === 0 ? "#dia-input" : "#dia-input-2").val();
+            const month = $(tipoAtendimento === 0 ? "#mes-input" : "#mes-input-2").val();
+            const year = $(tipoAtendimento === 0 ? "#year-input" : "#year-input-2").val();
+            const planInputValue = getElement(tipoAtendimento === 0 ? "#plan-input" : "#plan-input-2").value;
 
 
             getTimes({
@@ -584,18 +593,21 @@
                 month,
                 atendimentoType: planInputValue
             })
+
         })
 
-        let tipoAtendimento = 0
 
 
-        $("#atendimento-eletronico-input, #atendimento-eletronico-submit").click(function () {
-            console.log("tipoAtendimento", 1)
+
+        $("#atendimento-eletronico-input, #atendimento-eletronico-submit").click(async function () {
+            clearError()
+            await getPlans()
             tipoAtendimento = 1
         });
 
-        $("#atendimento-presencial-input, #atendimento-eletronico-submit").click(function () {
-            console.log("tipoAtendimento", 0)
+        $("#atendimento-presencial-input, #atendimento-eletronico-submit").click(async function () {
+            clearError()
+            await getPlans()
             tipoAtendimento = 0
         });
 
@@ -605,13 +617,17 @@
             const result = response
 
 
-            const planInput = $("#plan-input, #plan-input-2");
+            const planInput = $("#plan-input");
+            const planInput2 = $("#plan-input-2");
+
 
             $.each(result, function (index, value) {
                 planInput.append("<option value='" + value.id + "'>" + value.descricao + "</option>");
+                planInput2.append("<option value='" + value.id + "'>" + value.descricao + "</option>");
             });
 
             planInput.val(result[0].id);
+            planInput2.val(result[0].id);
         }
 
         getPlans()
@@ -620,70 +636,78 @@
             clearError()
         })
 
-        async function createRegistration() {
-            alert("createRegistration")
-            clearError()
-            const phoneValue = getElement(tipoAtendimento === 0 ? "#phone-01" : "#phone-02").value;
-            const cpfInputValue = getElement(tipoAtendimento === 0 ? "#cpf-01" : "#cpf-02").value;
-            const timeInputValue = getElement(tipoAtendimento === 0 ? "#time-input-2" : "#horario-2").value;
-            const planInputValue = getElement(tipoAtendimento === 0 ? "#plan-input" : "#plan-input-2").value;
-            const emailInputValue = getElement(tipoAtendimento === 0 ? "#email-input" : "#email-input-2").value;
-            const assuntoInputValue = getElement("#assunto-input") ? getElement("#assunto-input").value : "";
-            const day = getElement(tipoAtendimento === 0 ? "#dia-input" : "#dia-input-2").value
-            const month = getElement(tipoAtendimento === 0 ? "#mes-input" : "#mes-input-2").value
-            const year = getElement(tipoAtendimento === 0 ? "#year-input" : "#year-input-2").value
-            const phoneDDD = phoneValue.replace("(", "").replace(")", "").substring(0, 3);
-            const phoneRest = phoneValue.replace("(", "").replace(")", "").substring(3);
 
 
-            // Verify the values
-            if (cpfInputValue && timeInputValue && planInputValue && emailInputValue && phoneValue) {
-                // Split the phone value
-
-                const resultCPF = await isAttendAlreadyExist({
-                    cpf: cpfInputValue,
-                    typeAtt: tipoAtendimento
-                })
-
-
-                if (resultCPF) {
-
-                    const raw = {
-                        ano: year,
-                        dia: day,
-                        mes: month,
-                        plano: planInputValue,
-                        assunto: tipoAtendimento === 1 ? assuntoInputValue : "Outros",
-                        horario: timeInputValue,
-                        cpf: cpfInputValue,
-                        ddd: phoneDDD.replace(" ", ""),
-                        telefone: phoneRest.replace(" ", "").replace("-", ""),
-                        email: emailInputValue,
-                        tipoAtendimento: tipoAtendimento,
-                    };
-
-                    const response = await scheduleAttend(raw)
-                    console.log("response schedule ===> ", response)
-
-                }
-
-                return;
-
-            } else {
-                showFormFailMessage("Todos os campos são obrigatorios")
-                console.log("One or more input values are missing.");
-                return;
-            }
-
-
-        }
-
-        getElement("#atendimento-presencial-submit, #atendimento-eletronico-submit").addEventListener(
-            "click",
-            createRegistration
-        );
 
     }
 
     loadScript()
+
+    async function createRegistration() {
+        clearError()
+        const phoneValue = getElement(tipoAtendimento === 0 ? "#phone-01" : "#phone-02").value;
+        const cpfInputValue = getElement(tipoAtendimento === 0 ? "#cpf-01" : "#cpf-02").value;
+        const timeInputValue = getElement(tipoAtendimento === 0 ? "#time-input-2" : "#horario-2").value;
+        const planInputValue = getElement(tipoAtendimento === 0 ? "#plan-input" : "#plan-input-2").value;
+        const emailInputValue = getElement(tipoAtendimento === 0 ? "#email-input" : "#email-input-2").value;
+        const assuntoInputValue = getElement("#assunto-input") ? getElement("#assunto-input").value : "";
+        const day = getElement(tipoAtendimento === 0 ? "#dia-input" : "#dia-input-2").value
+        const month = getElement(tipoAtendimento === 0 ? "#mes-input" : "#mes-input-2").value
+        const year = getElement(tipoAtendimento === 0 ? "#year-input" : "#year-input-2").value
+        const phoneDDD = phoneValue.replace("(", "").replace(")", "").substring(0, 3);
+        const phoneRest = phoneValue.replace("(", "").replace(")", "").substring(3);
+
+
+        // Verify the values
+        if (cpfInputValue && timeInputValue && planInputValue && emailInputValue && phoneValue) {
+            // Split the phone value
+
+            const resultCPF = await isAttendAlreadyExist({
+                cpf: cpfInputValue,
+                typeAtt: tipoAtendimento
+            })
+
+
+            if (resultCPF) {
+
+                const raw = {
+                    ano: year,
+                    dia: day,
+                    mes: month,
+                    plano: planInputValue,
+                    assunto: tipoAtendimento === 1 ? assuntoInputValue : "Outros",
+                    horario: timeInputValue,
+                    cpf: cpfInputValue,
+                    ddd: phoneDDD.replace(" ", ""),
+                    telefone: phoneRest.replace(" ", "").replace("-", ""),
+                    email: emailInputValue,
+                    tipoAtendimento: tipoAtendimento,
+                };
+
+                const response = await scheduleAttend(raw)
+                console.log("response schedule ===> ", response)
+
+            }
+
+            return;
+
+        } else {
+            showFormFailMessage("Todos os campos são obrigatorios")
+            console.log("One or more input values are missing.");
+            return;
+        }
+
+
+    }
+
+
+    document.querySelector("#atendimento-presencial-submit").addEventListener(
+        "click",
+        createRegistration
+    )
+
+    document.querySelector("#atendimento-eletronico-submit").addEventListener(
+        "click",
+        createRegistration
+    )
 </script>
