@@ -110,6 +110,24 @@
         return document.querySelector(selector);
     }
 
+   async function getPlans() {
+            const response = await api(`${urlSchedule}/plano`)
+            const result = response
+
+
+            const planInput = $("#plan-input");
+            const planInput2 = $("#plan-input-2");
+
+
+            $.each(result, function (index, value) {
+                planInput.append("<option value='" + value.id + "'>" + value.descricao + "</option>");
+                planInput2.append("<option value='" + value.id + "'>" + value.descricao + "</option>");
+            });
+
+            planInput.val(result[0].id);
+            planInput2.val(result[0].id);
+   }
+
 
     async function getTimes({
         day,
@@ -281,24 +299,7 @@
         });
 
 
-        async function getPlans() {
-            const response = await api(`${urlSchedule}/plano`)
-            const result = response
-
-
-            const planInput = $("#plan-input");
-            const planInput2 = $("#plan-input-2");
-
-
-            $.each(result, function (index, value) {
-                planInput.append("<option value='" + value.id + "'>" + value.descricao + "</option>");
-                planInput2.append("<option value='" + value.id + "'>" + value.descricao + "</option>");
-            });
-
-            planInput.val(result[0].id);
-            planInput2.val(result[0].id);
-        }
-
+        
         getPlans()
 
         $("#dia-input, #mes-input, #year-input, #plan-input,#mes-input-2, #year-input-2, #plan-input-2, #phone-01,#phone-02, #time-input-2, #email-input,#email-input-2, #assunto-input").change(function () {
