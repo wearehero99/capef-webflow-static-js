@@ -110,8 +110,8 @@
         $("#cpf-02").mask("999.999.999-99");
     });
 
-    const loadingIcon = $("#loading-icon");
-    const preloader = $("#preloader"); 
+    const loadingIcon = document.getElementById("loading-icon");
+    const preloader = document.getElementById("preloader"); 
 
     loadingIcon.style.background = "#28343e";
     loadingIcon.style.padding = "10px";
