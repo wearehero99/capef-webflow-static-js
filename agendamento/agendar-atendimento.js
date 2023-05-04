@@ -266,13 +266,18 @@ async function loadScript() {
       const result = response
 
 
-      const planInput = $("#plan-input, #plan-input-2");
+      const planInput = $("#plan-input");
+      const planInput2 = $("#plan-input-2");
+
 
       $.each(result, function (index, value) {
          planInput.append("<option value='" + value.id + "'>" + value.descricao + "</option>");
+         planInput2.append("<option value='" + value.id + "'>" + value.descricao + "</option>");
+
       });
 
       planInput.val(result[0].id);
+      planInput2.val(result[0].id);
    }
 
    getPlans()
