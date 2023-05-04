@@ -233,9 +233,10 @@ async function loadScript() {
    $("#dia-input, #mes-input, #year-input, #plan-input, #dia-input-2, #mes-input-2, #year-input-2, #plan-input-2").change(function () {
       clearError()
       // Get the new input values
-      const day = $("#dia-input").val();
-      const month = $("#mes-input").val();
-      const year = $("#year-input").val();
+
+      const day = $(tipoAtendimento  === 0 ? "#dia-input" : "#dia-input-2").val();
+      const month = $(tipoAtendimento  === 0 ? "#mes-input": "#mes-input-2").val();
+      const year = $(tipoAtendimento  === 0 ? "#year-input": "#year-input-2").val();
       const planInputValue = getElement(tipoAtendimento  === 0 ? "#plan-input":"#plan-input-2").value;
 
 
@@ -245,6 +246,7 @@ async function loadScript() {
          month,
          atendimentoType: planInputValue
       })
+
    })
 
    
@@ -273,7 +275,6 @@ async function loadScript() {
       $.each(result, function (index, value) {
          planInput.append("<option value='" + value.id + "'>" + value.descricao + "</option>");
          planInput2.append("<option value='" + value.id + "'>" + value.descricao + "</option>");
-
       });
 
       planInput.val(result[0].id);
@@ -347,12 +348,12 @@ async function loadScript() {
       "click",
       createRegistration
    );
-
-   getElement("#atendimento-eletronico-submit").addEventListener(
-      "click",
-      ()=> { console.log("#atendimento-eletronico-submit") }
-   );
-
 }
 
 loadScript()
+
+
+getElement("#atendimento-eletronico-submit").addEventListener(
+      "click",
+      ()=> { console.log("#atendimento-eletronico-submit") }
+);
