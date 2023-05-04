@@ -94,7 +94,7 @@
         $(".w-form-fail").text(message);
     }
 
-    function addMask($){
+    function addMask(){
        $("#phone-01").mask("(99) 9 9999-9999");
         $("#phone-02").mask("(99) 9 9999-9999");
         $("#cpf-01").mask("999.999.999-99");
@@ -103,7 +103,7 @@
 
 
     $(document).ready(function ($) {
-       addMask($)
+       addMask()
     });
 
     function getElement(selector) {
