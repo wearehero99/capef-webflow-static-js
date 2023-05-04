@@ -24,11 +24,7 @@
       }
    }
 
-async function loadScript() {
-    let tipoAtendimento = 0
-   await setupToken()
-
-   async function authFetch(url, options = {}) {
+  async function authFetch(url, options = {}) {
       try {
          let token = localStorage.getItem('authToken');
 
@@ -79,7 +75,13 @@ async function loadScript() {
       }
    }
 
-   const api = authFetch
+
+ function clearError() {
+      $(".w-form-fail").css("display", "none");
+      $(".w-form-fail").text("");
+   }
+
+const api = authFetch
 
 
    var urlSchedule = "https://apiagendamento.capef.com.br"
@@ -90,10 +92,6 @@ async function loadScript() {
       $(".w-form-fail").text(message);
    }
 
-   function clearError() {
-      $(".w-form-fail").css("display", "none");
-      $(".w-form-fail").text("");
-   }
 
    $(document).ready(function () {
       $("#phone-01").mask("(99) 9 9999-9999");
@@ -101,11 +99,11 @@ async function loadScript() {
       $("#cpf-01").mask("999.999.999-99");
       $("#cpf-02").mask("999.999.999-99");
    });
-
-
+  
    function getElement(selector) {
       return document.querySelector(selector);
    }
+
 
    async function getTimes({
       day,
@@ -154,14 +152,14 @@ async function loadScript() {
 
    }
 
-
-   async function checkCPF(cpf) {
+async function checkCPF(cpf) {
       const response = await api(`${urlSchedule}/agendamento/validar/cpf/${cpf}`)
       const data = (await response).json()
       console.log("checkCPF Data ====> ", data)
    }
 
-   async function getTimesOfToday() {
+
+  async function getTimesOfToday() {
       const currentDate = new Date();
 
       // Get the current day, month, and year
@@ -184,9 +182,8 @@ async function loadScript() {
       })
    }
 
-   getTimesOfToday()
 
-   async function isAttendAlreadyExist({
+async function isAttendAlreadyExist({
       typeAtt,
       cpf
    }) {
@@ -205,7 +202,7 @@ async function loadScript() {
 
    }
 
-   async function scheduleAttend(data) {
+     async function scheduleAttend(data) {
 
       clearError()
       $("#atendimento-presencial-submit, #atendimento-eletronico-submit").prop("disabled", true);
@@ -224,10 +221,26 @@ async function loadScript() {
       }
    }
 
-
-   function getElement(selector) {
+    function getElement(selector) {
       return document.querySelector(selector);
    }
+
+   
+async function loadScript() {
+    let tipoAtendimento = 0
+
+   await setupToken()
+
+ 
+
+   getTimesOfToday()
+
+   
+
+ 
+
+
+  
 
 
    $("#dia-input, #mes-input, #year-input, #plan-input, #dia-input-2, #mes-input-2, #year-input-2, #plan-input-2").change(function () {
@@ -287,7 +300,14 @@ async function loadScript() {
       clearError()
    })
 
-   async function createRegistration() {
+ 
+
+  
+}
+
+loadScript()
+
+  async function createRegistration() {
       clearError()
       const phoneValue = getElement(tipoAtendimento ===0 ?  "#phone-01" :"#phone-02").value;
       const cpfInputValue = getElement(tipoAtendimento === 0 ? "#cpf-01": "#cpf-02").value;
@@ -344,16 +364,13 @@ async function loadScript() {
 
    }
 
-   getElement("#atendimento-presencial-submit").addEventListener(
+
+document.querySelector("#atendimento-presencial-submit").addEventListener(
       "click",
       createRegistration
-   );
-}
-
-loadScript()
-
+)
 
 document.querySelector("#atendimento-eletronico-submit").addEventListener(
       "click",
-      ()=> { console.log("#atendimento-eletronico-submit") }
+      createRegistration
 )
