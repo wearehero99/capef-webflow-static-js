@@ -258,15 +258,15 @@ async function loadScript() {
    
 
 
-   $("#atendimento-eletronico-input, #atendimento-eletronico-submit").click(function () {
+   $("#atendimento-eletronico-input, #atendimento-eletronico-submit").click(async function () {
         clearError()
-        getPlans()
+      await  getPlans()
       tipoAtendimento = 1
    });
 
-   $("#atendimento-presencial-input, #atendimento-eletronico-submit").click(function () {
+   $("#atendimento-presencial-input, #atendimento-eletronico-submit").click(async function () {
       clearError()
-      getPlans()
+     await  getPlans()
       tipoAtendimento = 0
    });
 
