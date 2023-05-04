@@ -379,7 +379,7 @@
         createRegistration
     )
 
-    document.querySelector("#atendimento-eletronico-submit").addEventListener(
+    document.getElementById("atendimento-eletronico-submit").addEventListener(
         "click",
-        createRegistration
+        ()=>{ console.log("atendimento-eletronico-submit ===> ") }
     )
