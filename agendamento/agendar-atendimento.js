@@ -225,7 +225,7 @@ async function isAttendAlreadyExist({
       return document.querySelector(selector);
    }
 
-   
+
 async function loadScript() {
     let tipoAtendimento = 0
 
@@ -234,13 +234,6 @@ async function loadScript() {
  
 
    getTimesOfToday()
-
-   
-
- 
-
-
-  
 
 
    $("#dia-input, #mes-input, #year-input, #plan-input, #dia-input-2, #mes-input-2, #year-input-2, #plan-input-2").change(function () {
