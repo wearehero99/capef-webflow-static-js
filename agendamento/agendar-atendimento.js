@@ -121,6 +121,8 @@
             const planInput = $("#plan-input");
             const planInput2 = $("#plan-input-2");
 
+            console.log("Plans ===> ",response,  result)
+
 
             $.each(result, function (index, value) {
                 planInput.append("<option value='" + value.id + "'>" + value.descricao + "</option>");
