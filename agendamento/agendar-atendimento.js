@@ -143,6 +143,8 @@
 
         const attId = atendimentoType
 
+        console.log("atendimentoType", atendimentoType)
+
         try {
             const response = await
                 api(`${urlCalend}/horarios/atendimento/${attId}/dia/${day}/mes/${month}/ano/${year}`)
