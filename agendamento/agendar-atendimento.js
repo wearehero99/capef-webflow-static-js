@@ -287,7 +287,7 @@
 
 
 
-        $("#atendimento-eletronico-input, #atendimento-eletronico-submit").click(async function () {
+        $("#atendimento-eletronico-input").click(async function () {
             clearError()
                    addMask()
 
@@ -295,7 +295,7 @@
             tipoAtendimento = 1
         });
 
-        $("#atendimento-presencial-input, #atendimento-eletronico-submit").click(async function () {
+        $("#atendimento-presencial-input").click(async function () {
             clearError()
                    addMask()
 
