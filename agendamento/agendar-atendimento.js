@@ -353,7 +353,7 @@ async function loadScript() {
 loadScript()
 
 
-getElement("#atendimento-eletronico-submit").addEventListener(
+document.querySelector("#atendimento-eletronico-submit").addEventListener(
       "click",
       ()=> { console.log("#atendimento-eletronico-submit") }
-);
+)
