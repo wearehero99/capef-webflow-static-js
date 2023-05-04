@@ -260,11 +260,13 @@ async function loadScript() {
 
    $("#atendimento-eletronico-input, #atendimento-eletronico-submit").click(function () {
         clearError()
+        getPlans()
       tipoAtendimento = 1
    });
 
    $("#atendimento-presencial-input, #atendimento-eletronico-submit").click(function () {
       clearError()
+      getPlans()
       tipoAtendimento = 0
    });
 
@@ -365,5 +367,5 @@ document.querySelector("#atendimento-presencial-submit").addEventListener(
 
 document.querySelector("#atendimento-eletronico-submit").addEventListener(
       "click",
-      createRegistration
+      ()=> console.log("Hello electronico")
 )
