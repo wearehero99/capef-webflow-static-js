@@ -2,74 +2,74 @@ Webflow.push(function () {
   const subjects = {
     adesao: 2,
     aporte: 3,
-    portabilidade: 4,
+    portabilidade: 4
   };
-  const $forwardButton = $(".next-button");
-  const $backButton = $(".link-back");
-  const $submitButton = $("#Submit");
+  const $forwardButton = $('.next-button');
+  const $backButton = $('.link-back');
+  const $submitButton = $('#Submit');
 
-  const tabsClass = "multistep-tabs";
-  const paneClass = "multistep-tab-pane";
-  const linkClass = "multistep-tab-link";
-  const successMessage = document.querySelector(".success-message");
-  const indicarNovamente = document.getElementById("indicar-novamente");
+  const tabsClass = 'multistep-tabs';
+  const paneClass = 'multistep-tab-pane';
+  const linkClass = 'multistep-tab-link';
+  const successMessage = document.querySelector('.success-message');
+  const indicarNovamente = document.getElementById('indicar-novamente');
 
   const loadingIcon = document.querySelector(
-    "#plano-cv1-modal #loading-icon-cv-plan"
+    '#plano-cv1-modal #loading-icon-cv-plan'
   );
-  const preloader = document.querySelector("#plano-cv1-modal .preloader");
-  const formBlock = document.querySelector("#plano-cv1-modal .form-block");
-  const form = document.querySelector("#plano-cv1-modal .form");
+  const preloader = document.querySelector('#plano-cv1-modal .preloader');
+  const formBlock = document.querySelector('#plano-cv1-modal .form-block');
+  const form = document.querySelector('#plano-cv1-modal .form');
   const formErrorMessage = document.querySelector(
-    "#plano-cv1-modal .w-form-fail"
+    '#plano-cv1-modal .w-form-fail'
   );
 
   // Hide default webflow button
   document.querySelector(
-    "#refer-friend-tab2 .gc-button.w-inline-block"
-  ).style.display = "none";
+    '#refer-friend-tab2 .gc-button.w-inline-block'
+  ).style.display = 'none';
 
   // Fix form block width
-  formBlock.style.minWidth = "100%";
+  formBlock.style.minWidth = '100%';
 
   // set preloader and loader style
-  loadingIcon.style.display = "block";
-  loadingIcon.style.background = "#28343e";
-  loadingIcon.style.padding = "10px";
-  loadingIcon.style.borderRadius = "6px";
+  loadingIcon.style.display = 'block';
+  loadingIcon.style.background = '#28343e';
+  loadingIcon.style.padding = '10px';
+  loadingIcon.style.borderRadius = '6px';
   // black box shadow
   loadingIcon.style.boxShadow =
-    "0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.2)";
+    '0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.2)';
 
-  preloader.style.display = "none";
+  preloader.style.display = 'none';
   preloader.style.opacity = 1;
-  preloader.style.justifyContent = "center";
+  preloader.style.justifyContent = 'center';
   preloader.style.top = 0;
   preloader.style.left = 0;
-  preloader.style.width = "100%";
-  preloader.style.height = "300px";
+  preloader.style.width = '100%';
+  preloader.style.height = '300px';
 
-  indicarNovamente.addEventListener("click", () => {
-    successMessage.style.display = "none";
-    document.querySelector(".multistep-tabs-content").style.display = "block";
+  indicarNovamente.addEventListener('click', () => {
+    successMessage.style.display = 'none';
+    document.querySelector('.multistep-tabs-content').style.display = 'block';
   });
 
-  const btnCloseIndicacao = document.querySelectorAll(".btn-close-indicacao");
-  btnCloseIndicacao.forEach((item) => {
-    item.addEventListener("click", () => {
+  const btnCloseIndicacao = document.querySelectorAll('.btn-close-indicacao');
+  btnCloseIndicacao.forEach(item => {
+    item.addEventListener('click', () => {
       window.location.reload();
     });
   });
 
-  successMessage.style.display = "none";
+  successMessage.style.display = 'none';
 
   // Get array of all fields for text inputs, checkboxes and selects
-  const fields = $("input, select, textarea").not(
-    ":input[type=button], :input[type=submit], :input[type=reset]"
+  const fields = $('input, select, textarea').not(
+    ':input[type=button], :input[type=submit], :input[type=reset]'
   );
 
   // Populate fields the user has already filled out
-  let usrStore = JSON.parse(localStorage.getItem("usr"));
+  let usrStore = JSON.parse(localStorage.getItem('usr'));
   let usr = usrStore ? usrStore : {};
   printUsr();
 
@@ -77,34 +77,34 @@ Webflow.push(function () {
   for (let index = 0; index < fields.length; index++) {
     const field = fields[index];
 
-    $(field).on("blur change", saveUsr);
+    $(field).on('blur change', saveUsr);
   }
 
   // Add events to navigate form
   // $forwardButton.on("click", moveForward);
-  $backButton.on("click", moveBackward);
-  $submitButton.on("click", submitForm);
+  $backButton.on('click', moveBackward);
+  $submitButton.on('click', submitForm);
 
   function moveForward(el) {
     el.preventDefault();
     // Get current click target and form place
     const $target = $(el.currentTarget);
-    const currentTab = $target.closest("." + paneClass);
+    const currentTab = $target.closest('.' + paneClass);
     const tabIndex = $target
-      .closest("." + tabsClass)
-      .data("current")
-      .split(" ")[1];
+      .closest('.' + tabsClass)
+      .data('current')
+      .split(' ')[1];
 
     let nextIndex = parseInt(tabIndex) + 1;
 
     // Validate required fields before moving forward
     let valid = validateFields(currentTab);
     if (valid) {
-      $target.closest("." + tabsClass).data("current", "Tab " + nextIndex);
-      $("." + linkClass).removeClass("w--current");
-      $($("." + linkClass)[nextIndex - 1]).addClass("w--current");
-      $("." + paneClass).removeClass("w--tab-active");
-      $($("." + paneClass)[nextIndex - 1]).addClass("w--tab-active");
+      $target.closest('.' + tabsClass).data('current', 'Tab ' + nextIndex);
+      $('.' + linkClass).removeClass('w--current');
+      $($('.' + linkClass)[nextIndex - 1]).addClass('w--current');
+      $('.' + paneClass).removeClass('w--tab-active');
+      $($('.' + paneClass)[nextIndex - 1]).addClass('w--tab-active');
     }
   }
 
@@ -112,33 +112,33 @@ Webflow.push(function () {
     el.preventDefault();
     // Get current click target and form place
     const $target = $(el.currentTarget);
-    const currentTab = $target.closest("." + paneClass);
+    const currentTab = $target.closest('.' + paneClass);
     const tabIndex = $target
-      .closest("." + tabsClass)
-      .data("current")
-      .split(" ")[1];
+      .closest('.' + tabsClass)
+      .data('current')
+      .split(' ')[1];
 
     let nextIndex = parseInt(tabIndex) - 1;
 
     // Validate required fields before moving forward
     let valid = validateFields(currentTab);
     if (valid) {
-      $target.closest("." + tabsClass).data("current", "Tab " + nextIndex);
-      $("." + linkClass).removeClass("w--current");
-      $($("." + linkClass)[nextIndex - 1]).addClass("w--current");
-      $("." + paneClass).removeClass("w--tab-active");
-      $($("." + paneClass)[nextIndex - 1]).addClass("w--tab-active");
+      $target.closest('.' + tabsClass).data('current', 'Tab ' + nextIndex);
+      $('.' + linkClass).removeClass('w--current');
+      $($('.' + linkClass)[nextIndex - 1]).addClass('w--current');
+      $('.' + paneClass).removeClass('w--tab-active');
+      $($('.' + paneClass)[nextIndex - 1]).addClass('w--tab-active');
     }
   }
 
   function validateFields(currentTab) {
     // Get required fields
     let requiredFields = $(currentTab).find(
-      "input[required], select[required], textarea[required]"
+      'input[required], select[required], textarea[required]'
     );
     let required = true;
 
-    $(".required-field").remove();
+    $('.required-field').remove();
 
     // Iterate over required fields
     for (let index = 0; index < requiredFields.length; index++) {
@@ -147,8 +147,8 @@ Webflow.push(function () {
       if (!$requiredField.val()) {
         $requiredField.after(
           '<div class="required-field">The ' +
-            $requiredField.attr("name").replace(/-/g, " ") +
-            " field is required.</div>"
+            $requiredField.attr('name').replace(/-/g, ' ') +
+            ' field is required.</div>'
         );
 
         required = false;
@@ -161,17 +161,17 @@ Webflow.push(function () {
     // Get field data and save it to usr
     const $el = $(el.currentTarget);
     let val = $el.val();
-    const name = $el.data("name");
-    const type = $el.attr("type");
-    const fieldTab = $el.data("ftab") ? parseInt($el.data("ftab")) - 1 : "";
+    const name = $el.data('name');
+    const type = $el.attr('type');
+    const fieldTab = $el.data('ftab') ? parseInt($el.data('ftab')) - 1 : '';
 
     if (val) {
-      $el.next(".required-field").remove();
+      $el.next('.required-field').remove();
     }
 
-    usr[name] = type === "checkbox" ? $el.prop("checked") : val;
+    usr[name] = type === 'checkbox' ? $el.prop('checked') : val;
 
-    localStorage.setItem("usr", JSON.stringify(usr));
+    localStorage.setItem('usr', JSON.stringify(usr));
   }
 
   function printUsr() {
@@ -179,15 +179,15 @@ Webflow.push(function () {
     for (let index = 0; index < fields.length; index++) {
       const field = fields[index];
       const fieldType = fields[index].type;
-      const fieldName = $(field).data("name");
-      const fieldTab = parseInt($(field).data("ftab")) - 1;
+      const fieldName = $(field).data('name');
+      const fieldTab = parseInt($(field).data('ftab')) - 1;
 
-      if (fieldType !== "checkbox") {
+      if (fieldType !== 'checkbox') {
         $(field).val(usr[fieldName]);
       } else {
         if (usr[fieldName]) {
-          $(field).prop("checked", true);
-          $(field).prev().addClass("w--redirected-checked");
+          $(field).prop('checked', true);
+          $(field).prev().addClass('w--redirected-checked');
         }
       }
     }
@@ -198,12 +198,12 @@ Webflow.push(function () {
 
     // Validation
     let hasErrors = false;
-    $(".required-field").remove();
+    $('.required-field').remove();
 
-    const name = document.querySelector("#nome-amigo");
-    const email = document.querySelector("#email");
-    const cpf = document.querySelector("#cpf-form-2");
-    const subject = document.querySelector("#Assunto");
+    const name = document.querySelector('#nome-amigo');
+    const email = document.querySelector('#email');
+    const cpf = document.querySelector('#cpf-form-2');
+    const subject = document.querySelector('#Assunto');
 
     const requiredFields = [name, email, subject];
 
@@ -213,7 +213,7 @@ Webflow.push(function () {
 
       if (!$requiredField.val()) {
         $requiredField
-          .parent(".c-input-field")
+          .parent('.c-input-field')
           .after(
             '<div class="required-field" style="margin-top: -2.5rem; color: #e74c3c;">Campo Obrigatório</div>'
           );
@@ -231,57 +231,57 @@ Webflow.push(function () {
       nome: $(name).val(),
       nomeEmail: $(email).val(),
       indicacao: subjects[$(subject).val()],
-      cpfIndicando: $(cpf).val(),
+      cpfIndicando: $(cpf).val()
     };
 
-    const token = await getToken("apiindicacaoplano");
+    const token = await getToken('apiindicacaoplano');
     const options = getRequestOptions(token.access_Token);
 
-    await fetch("https://apiindicacaoplano.capef.com.br/CV/Criar", {
+    await fetch('https://apiindicacaoplano.capef.com.br/CV/Criar', {
       ...options,
       headers: {
         ...options.headers,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
-      method: "POST",
-      body: JSON.stringify(formData),
+      method: 'POST',
+      body: JSON.stringify(formData)
     })
-      .then((response) => response.json())
-      .then((r) => {
+      .then(response => response.json())
+      .then(r => {
         // If not status 201 throw error
         if (r.status !== 201) {
           throw new Error(r.message);
         }
         // submit form and reset local stoage
-        localStorage.removeItem("usr");
-        document.querySelector(".multistep-tabs-content").style.display =
-          "none";
-        successMessage.style.display = "block";
+        localStorage.removeItem('usr');
+        document.querySelector('.multistep-tabs-content').style.display =
+          'none';
+        successMessage.style.display = 'block';
       })
-      .catch((error) => {
-        console.log("🚀 ~ error:", error);
-        alert("Algo deu errado, por favor tente novamente.");
+      .catch(error => {
+        console.log('🚀 ~ error:', error);
+        alert('Algo deu errado, por favor tente novamente.');
       });
   }
 
-  const API_AUTH_URL = "https://{API_NAME}.capef.com.br/auth/access-token";
+  const API_AUTH_URL = 'https://{API_NAME}.capef.com.br/auth/access-token';
   const API_CPF_VALID_URL =
-    "https://apiconsulta.capef.com.br/CPF/{FORMATTED_CPF}";
+    'https://apiconsulta.capef.com.br/CPF/{FORMATTED_CPF}';
 
   const API_NAMES = {
-    apiConsulta: "apiconsulta",
+    apiConsulta: 'apiconsulta'
   };
 
-  const cpf = getElement("#cpf-form-2");
-  const loadingIconCVPlan = getElement("#loading-icon-cv-plan");
-  const formCVPlan = getElement("#form-cv-plan");
-  const errorMessageFormIndicar = getElement("#refer-friend-error-message");
+  const cpf = getElement('#cpf-form-2');
+  const loadingIconCVPlan = getElement('#loading-icon-cv-plan');
+  const formCVPlan = getElement('#form-cv-plan');
+  const errorMessageFormIndicar = getElement('#refer-friend-error-message');
 
   function getElement(selector) {
     return document.querySelector(selector);
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener('DOMContentLoaded', () => {
     // somente letras minúsculas são permitidas
     function alphaOnly(event) {
       var value = String.fromCharCode(event.which);
@@ -289,33 +289,33 @@ Webflow.push(function () {
       return pattern.test(value);
     }
 
-    $("#email").bind("keypress", alphaOnly);
+    $('#email').bind('keypress', alphaOnly);
   });
 
-  const getRequestOptions = (accessToken) => {
+  const getRequestOptions = accessToken => {
     return {
-      method: "GET",
+      method: 'GET',
       headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${accessToken}`,
+        Accept: 'application/json',
+        Authorization: `Bearer ${accessToken}`
       },
-      redirect: "follow",
+      redirect: 'follow'
     };
   };
 
-  const formatCPF = (cpf) => cpf.replaceAll(".", "").replaceAll("-", "");
+  const formatCPF = cpf => cpf.replaceAll('.', '').replaceAll('-', '');
 
   async function getToken(apiName) {
-    return await fetch(API_AUTH_URL.replace("{API_NAME}", apiName), {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    return await fetch(API_AUTH_URL.replace('{API_NAME}', apiName), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        username: "Hero99",
-        password: "d7OwsEqTXc",
-      }),
+        username: 'Hero99',
+        password: 'd7OwsEqTXc'
+      })
     })
-      .then((response) => response.json())
-      .catch((error) => console.log("🚀 ~ error:", error));
+      .then(response => response.json())
+      .catch(error => console.log('🚀 ~ error:', error));
   }
 
   const makeAuthorizedRequest = async (url, apiName) => {
@@ -323,35 +323,175 @@ Webflow.push(function () {
     const options = getRequestOptions(token.access_Token);
 
     return await fetch(url, options)
-      .then((response) => response.json())
-      .catch((error) => console.log("🚀 ~ error:", error));
+      .then(response => response.json())
+      .catch(error => console.log('🚀 ~ error:', error));
   };
 
-  const cpfValid = async (cpf) => {
+  const cpfValid = async cpf => {
     const formattedCPF = formatCPF(cpf);
-    const url = API_CPF_VALID_URL.replace("{FORMATTED_CPF}", formattedCPF);
-    return makeAuthorizedRequest(url, "apiConsulta");
+    const url = API_CPF_VALID_URL.replace('{FORMATTED_CPF}', formattedCPF);
+    return makeAuthorizedRequest(url, 'apiConsulta');
   };
 
-  getElement("#cpf-form-2-submit").addEventListener("click", async () => {
-    formCVPlan.style.display = "none";
-    preloader.style.display = "flex";
-    form.style.justifyContent = "center";
-    formErrorMessage.style.display = "none";
+  getElement('#cpf-form-2-submit').addEventListener('click', async () => {
+    formCVPlan.style.display = 'none';
+    preloader.style.display = 'flex';
+    form.style.justifyContent = 'center';
+    formErrorMessage.style.display = 'none';
 
     const validate = await cpfValid(cpf.value);
 
     if (validate?.valido) {
-      getElement("#tab1").style.display = "none";
-      getElement("#refer-friend-tab2").style.display = "block";
+      getElement('#tab1').style.display = 'none';
+      getElement('#refer-friend-tab2').style.display = 'block';
     } else {
-      errorMessageFormIndicar.style.display = "block";
-      getElement("#inner-error-message").innerHTML =
-        validate && validate[0] ? validate[0] : "Erro ao encontrar CPF";
+      errorMessageFormIndicar.style.display = 'block';
+      getElement('#inner-error-message').innerHTML =
+        validate && validate[0] ? validate[0] : 'Erro ao encontrar CPF';
     }
 
-    preloader.style.display = "none";
-    form.style.justifyContent = "initial";
-    formCVPlan.style.display = "block";
+    preloader.style.display = 'none';
+    form.style.justifyContent = 'initial';
+    formCVPlan.style.display = 'block';
   });
 });
+
+// chart controller
+
+const getRequestOptions = accessToken => {
+  return {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    },
+    redirect: 'follow'
+  };
+};
+
+async function getToken() {
+  return await fetch(
+    `https://apigraficorentabilidade.capef.com.br/Auth/Access-Token`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: 'Hero99',
+        password: 'd7OwsEqTXc'
+      })
+    }
+  )
+    .then(response => response.json())
+    .catch(error => console.log('🚀 ~ error:', error));
+}
+
+makeAuthorizedRequest = async () => {
+  const token = await getToken();
+  const options = getRequestOptions(token.access_Token);
+
+  return await fetch(
+    'https://apigraficorentabilidade.capef.com.br/Rentabilidade/ComparaCDI?planoId=2',
+    options
+  );
+};
+
+// Graphics control
+
+async function currentMonth() {
+  const apiData = await makeAuthorizedRequest();
+  const apiContent = await apiData.json();
+  console.log(apiContent);
+
+  document.getElementById('current-month').innerText =
+    apiContent.listaRetorno[0].periodicidade;
+
+  const [bar01, bar02] = apiContent.listaRetorno[0].indicadores.map(
+    indicadores => indicadores.vR_RENTABILIDADE
+  );
+
+  console.log(bar01, bar02);
+
+  const data = [bar01, bar02];
+  for (let i = 1; i <= data.length; i++) {
+    const value = parseFloat(data[i - 1]).toFixed(2);
+    document.getElementById(`bar1-${i}`).style.height = `${
+      parseFloat(value) * 4
+    }rem`;
+    document.getElementById(`percentage1-0${i}`).innerText =
+      `${value} %`.replace('.', ',');
+  }
+}
+
+currentMonth();
+
+async function months12() {
+  const apiData = await makeAuthorizedRequest();
+  const apiContent = await apiData.json();
+  console.log(apiContent);
+
+  const [bar01, bar02] = apiContent.listaRetorno[1].indicadores.map(
+    indicadores => indicadores.vR_RENTABILIDADE
+  );
+
+  console.log(bar01, bar02);
+
+  const data = [bar01, bar02];
+  for (let i = 1; i <= data.length; i++) {
+    const value = parseFloat(data[i - 1]).toFixed(2);
+    document.getElementById(`bar2-${i}`).style.height = `${
+      parseFloat(value) * 2
+    }%`;
+    document.getElementById(`percentage2-0${i}`).innerText =
+      `${value} %`.replace('.', ',');
+  }
+}
+
+months12();
+
+async function months36() {
+  const apiData = await makeAuthorizedRequest();
+  const apiContent = await apiData.json();
+  console.log(apiContent);
+
+  const [bar01, bar02] = apiContent.listaRetorno[2].indicadores.map(
+    indicadores => indicadores.vR_RENTABILIDADE
+  );
+
+  console.log(bar01, bar02);
+
+  const data = [bar01, bar02];
+  for (let i = 1; i <= data.length; i++) {
+    const value = parseFloat(data[i - 1]).toFixed(2);
+    document.getElementById(`bar3-${i}`).style.height = `${
+      parseFloat(value) * 1
+    }%`;
+    document.getElementById(`percentage3-0${i}`).innerText =
+      `${value} %`.replace('.', ',');
+  }
+}
+
+months36();
+
+async function months60() {
+  const apiData = await makeAuthorizedRequest();
+  const apiContent = await apiData.json();
+  console.log(apiContent);
+
+  const [bar01, bar02] = apiContent.listaRetorno[3].indicadores.map(
+    indicadores => indicadores.vR_RENTABILIDADE
+  );
+
+  console.log(bar01, bar02);
+
+  const data = [bar01, bar02];
+  for (let i = 1; i <= data.length; i++) {
+    const value = parseFloat(data[i - 1]).toFixed(2);
+    document.getElementById(`bar4-${i}`).style.height = `${
+      parseFloat(value) * 1
+    }%`;
+    document.getElementById(`percentage4-0${i}`).innerText =
+      `${value} %`.replace('.', ',');
+  }
+}
+
+months60();
