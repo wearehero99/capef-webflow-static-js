@@ -33,6 +33,11 @@ preloader.style.height = "100%";
 
 dateTag.style.width = "119px";
 
+$("#Pesquisar-por-nome").change(function () {
+  const nameText = $("#Pesquisar-por-nome")          
+  console.log("nameText ===> ",nameText)
+});
+
 function atualizarDias() {
   const mes = +document.getElementById("mes").value; // Converter o valor de mes para um número inteiro
   const diasSelect = document.getElementById("dia");
