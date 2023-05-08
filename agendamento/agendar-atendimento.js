@@ -277,6 +277,8 @@
             body: JSON.stringify(data)
         });
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").prop("disabled", false);
+        $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
+
         if (response.status === 200) {
             $("#email-form02").css("display", "none");
             $(".w-form-done").css("display", "block");
@@ -367,8 +369,22 @@
                 };
                 const response = await scheduleAttend(raw);
                 console.log("response schedule ===> ", response);
+
+                if(response){
+
+                }else{
+                   $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
+                    showFormFailMessage("Aconteceu algum erro verifique os dados");
+                }
+
+                $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
+
+
+
                 preloader.style.display = "none";
             }
+             $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
+
             preloader.style.display = "none";
             return;
         } else {
