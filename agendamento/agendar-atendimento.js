@@ -308,7 +308,7 @@
         return document.querySelector(selector);
     }
     async function loadScript() {
-        await setupToken();
+        
         await setupToken();
         getTimesOfToday();
 
@@ -347,71 +347,6 @@
     }
 
     loadScript();
-    loadScript();
 
 
-    async function createRegistration() {
-        clearError();
-        const phoneValue = getElement(tipoAtendimento === 1 ? "#phone-01" : "#phone-02").value;
-        const cpfInputValue = getElement(tipoAtendimento === 1 ? "#cpf-01" : "#cpf-02").value;
-        const timeInputValue = getElement(tipoAtendimento === 1 ? "#time-input-2" : "#horario-2").value;
-        const planInputValue = getElement(tipoAtendimento === 1 ? "#plan-input" : "#plan-input-2").value;
-        const emailInputValue = getElement(tipoAtendimento === 1 ? "#email-input" : "#email-input-2").value;
-        const assuntoInputValue = getElement("#assunto-input") ? getElement("#assunto-input").value : "";
-        const day = getElement(tipoAtendimento === 1 ? "#dia-input" : "#dia-input-2").value;
-        const month = getElement(tipoAtendimento === 1 ? "#mes-input" : "#mes-input-2").value;
-        const year = getElement(tipoAtendimento === 1 ? "#year-input" : "#year-input-2").value;
-        const phoneDDD = phoneValue.replace("(", "").replace(")", "").substring(0, 3);
-        const phoneRest = phoneValue.replace("(", "").replace(")", "").substring(3);
-
-        if (cpfInputValue && timeInputValue && planInputValue && emailInputValue && phoneValue) {
-
-            preloader.style.display = "flex";
-
-            const resultCPF = await isAttendAlreadyExist({
-                cpf: cpfInputValue.replace(/\./g, "").replace("-", ""),
-                typeAtt: tipoAtendimento
-            });
-
-            if (!resultCPF) {
-                const raw = {
-                    ano: year,
-                    dia: day,
-                    mes: month,
-                    plano: planInputValue,
-                    assunto: tipoAtendimento === 1 ? assuntoInputValue : "Outros",
-                    horario: timeInputValue,
-                    cpf: cpfInputValue.replace(/\./g, "").replace("-", ""),
-                    ddd: phoneDDD.replace(" ", ""),
-                    telefone: phoneRest.replace(" ", "").replace("-", ""),
-                    email: emailInputValue,
-                    tipoAtendimento: tipoAtendimento,
-                };
-                const response = await scheduleAttend(raw);
-                console.log("response schedule ===> ", response);
-
-                if(response){
-
-                }else{
-                   $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
-                    showFormFailMessage("Aconteceu algum erro verifique os dados");
-                }
-
-                $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
-
-
-
-                preloader.style.display = "none";
-            }
-             $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
-
-            preloader.style.display = "none";
-            return;
-        } else {
-            showFormFailMessage("Todos os campos são obrigatorios");
-            console.log("One or more input values are missing.");
-            return;
-        }
-    }
-    document.querySelector("#atendimento-presencial-submit").addEventListener("click", createRegistration);
-     document.getElementById("atendimento-eletronico-submit").addEventListener("click", createRegistration);
+   
