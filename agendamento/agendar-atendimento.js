@@ -1,9 +1,25 @@
  let tipoAtendimento = 1;
 
+       const monthNames = [
+            "Janeiro",
+            "Fevereiro",
+            "Março",
+            "Abril",
+            "Maio",
+            "Junho",
+            "Julho",
+            "Agosto",
+            "Setembro",
+            "Outubro",
+            "Novembro",
+            "Dezembro",
+        ];
+
+
     async function setupToken() {
         let token = localStorage.getItem('authToken');
         if (!token) {
-            const authResponse = await fetch("https://apifalecimento.capef.com.br/auth/access-token", {
+            const authResponse = await fetch("https://ici002.capef.com.br/apiagendamento/auth/access-token", {
                 method: "POST",
                 body: JSON.stringify({
                     username: "Hero99",
@@ -69,8 +85,8 @@
         $(".w-form-fail").text("");
     }
     const api = authFetch;
-    var urlSchedule = "https://apiagendamento.capef.com.br";
-    var urlCalend = "https://apiagendamento.capef.com.br";
+    var urlSchedule = "https://ici002.capef.com.br/apiagendamento";
+    var urlCalend = "https://ici002.capef.com.br/apiagendamento";
 
     function showFormFailMessage(message) {
         $(".w-form-fail").css("display", "block");
@@ -176,22 +192,27 @@
         const data = (await response).json();
     }
 
-    function loadDaysOfMonth(selectElement) {
+    function loadDaysOfMonth(selectElement, selectedMonth) {
         
         selectElement.empty();
 
-      
         const currentDate = new Date();
-        const currentMonth = currentDate.getMonth();
-        const currentDay = currentDate.getDate();
+        const currentMonth = currentDate.getMonth()+1;
+        let currentDay = 1;
 
-       
-        const daysInMonth = new Date(currentDate.getFullYear(), currentMonth + 1, 0).getDate();
+      
+        let daysInMonth = 31;
+
+        if (selectedMonth === currentMonth) {
+            currentDay = currentDate.getDate();
+        }
 
         for (let day = currentDay; day <= daysInMonth; day++) {
             const option = $("<option>").val(day).text(day);
             selectElement.append(option);
         }
+
+        
     }
 
     function loadMonths(selectElement) {
@@ -201,29 +222,18 @@
        
         const currentDate = new Date();
         const currentMonth = currentDate.getMonth();
-
-        
-        const monthNames = [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
-        ];
-
+   
        
         for (let i = currentMonth; i < monthNames.length; i++) {
             const option = $("<option>").val(i).text(monthNames[i]);
             selectElement.append(option);
         }
     }
+
+        const diaEleme = $("#dia-input");
+        const diaEleme2 = $("#dia-input-2");
+        const mesElem = $("#mes-input");
+        const mesElem2 = $("#mes-input-2");
 
     async function getTimesOfToday() {
         const currentDate = new Date();
@@ -233,17 +243,16 @@
 
 
 
-        const diaEleme = $("#dia-input");
-        const diaEleme2 = $("#dia-input-2");
-        const mesElem = $("#mes-input");
-        const mesElem2 = $("#mes-input-2");
+       
 
 
         loadMonths(mesElem);
         loadMonths(mesElem2);
 
-        loadDaysOfMonth(diaEleme);
-        loadDaysOfMonth(diaEleme2);
+        loadDaysOfMonth(diaEleme, currentMonth);
+        loadDaysOfMonth(diaEleme2, currentMonth);
+
+
 
 
         getTimes({
@@ -253,6 +262,16 @@
             atendimentoType: tipoAtendimento
         });
     }
+
+
+    mesElem2.on("change", function () {
+        loadDaysOfMonth(diaEleme2, Number(mesElem2.val()) + 1);
+    });
+
+    mesElem.on("change", function () {
+        loadDaysOfMonth(diaEleme, Number(mesElem.val()) + 1);
+    });
+
     async function isAttendAlreadyExist({
         typeAtt,
         cpf

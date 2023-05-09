@@ -33,9 +33,19 @@ preloader.style.height = "100%";
 
 dateTag.style.width = "119px";
 
-$("#Pesquisar-por-nome").change(function () {
-  const nameText = $("#Pesquisar-por-nome")          
-  console.log("nameText ===> ",nameText)
+ const nameSelect = document.getElementById("Pesquisar-por-nome");
+    const daySelect = document.getElementById("mes");
+    const monthSelect = document.getElementById("dia");
+
+ nameSelect.addEventListener("keyup", function () {
+        const nameText = nameSelect.value;
+        if (nameText.length > 0) {
+            daySelect.disabled = true
+            monthSelect.disabled = true
+        } else {
+            daySelect.disabled = false
+            monthSelect.disabled = false
+        }
 });
 
 function atualizarDias() {

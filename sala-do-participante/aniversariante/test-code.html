@@ -292,11 +292,11 @@
     nameSelect.addEventListener("keyup", function () {
         const nameText = nameSelect.value;
         if (nameText.length > 0) {
-            console.log("Disable the selects")
-            daySelect.ariaDisabled = true
-            monthSelect.ariaDisabled = true
+            daySelect.disabled = true
+            monthSelect.disabled = true
         } else {
-            console.log("turn on the selects")
+            daySelect.disabled = false
+            monthSelect.disabled = false
         }
     });
 
@@ -380,7 +380,9 @@
 
         return await fetch(url, options)
             .then((response) => response.json())
-            .catch((error) => console.log("🚀 ~ error:", error));
+            .catch((error) => {
+
+            });
     };
 
     const birthdayResponse = async ({ name, date }) => {
@@ -469,12 +471,17 @@
 
         const response = await birthdayResponse({ name, date });
 
+        console.log("response ====> ", response)
+
         const list = $("#birthday-list");
         list.innerHTML = "";
 
         if (response.length) {
             const items = response.map(createListItem);
             items.forEach((item) => list.appendChild(item));
+        } else {
+            //show error
+
         }
         preloader.style.display = "none";
     }
