@@ -381,7 +381,7 @@
                     plano: planInputValue,
                     assunto: tipoAtendimento === 1 ? assuntoInputValue : "Outros",
                     horario: timeInputValue,
-                    cpf: cpfInputValue,
+                    cpf: cpfInputValue.replace(/\./g, "").replace("-", ""),
                     ddd: phoneDDD.replace(" ", ""),
                     telefone: phoneRest.replace(" ", "").replace("-", ""),
                     email: emailInputValue,
