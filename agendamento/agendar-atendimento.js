@@ -309,6 +309,8 @@
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
 
         if (response) {
+            //.solicitation-form-2
+            $(".solicitation-form-2").css("display", "none");
             $("#email-form02").css("display", "none");
             $(".w-form-done").css("display", "block");
         } else {
