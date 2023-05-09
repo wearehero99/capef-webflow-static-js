@@ -309,6 +309,7 @@
     }
     async function loadScript() {
         await setupToken();
+        await setupToken();
         getTimesOfToday();
 
         $("#dia-input, #mes-input, #year-input, #plan-input, #dia-input-2, #mes-input-2, #year-input-2, #plan-input-2").change(function () {
