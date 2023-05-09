@@ -1,19 +1,19 @@
- let tipoAtendimento = 1;
+ let tipoAtendimento = 2;
 
-       const monthNames = [
-            "Janeiro",
-            "Fevereiro",
-            "Março",
-            "Abril",
-            "Maio",
-            "Junho",
-            "Julho",
-            "Agosto",
-            "Setembro",
-            "Outubro",
-            "Novembro",
-            "Dezembro",
-        ];
+    const monthNames = [
+        "Janeiro",
+        "Fevereiro",
+        "Março",
+        "Abril",
+        "Maio",
+        "Junho",
+        "Julho",
+        "Agosto",
+        "Setembro",
+        "Outubro",
+        "Novembro",
+        "Dezembro",
+    ];
 
 
     async function setupToken() {
@@ -43,12 +43,17 @@
             let token = localStorage.getItem('authToken');
             const headers = {
                 ...options.headers,
-                "Authorization": `Bearer ${token}`
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
             };
             const dataResponse = await fetch(url, {
                 ...options,
                 headers
             });
+
+
+
+
             if (dataResponse.status === 401) {
                 localStorage.removeItem("authToken");
                 await setupToken();
@@ -60,20 +65,26 @@
                 }
             }
             if (!dataResponse.ok) {
-                if (await dataResponse.json()) {
-                    const result = await dataResponse.json();
-                    return {
-                        error: result[0],
-                        status: dataResponse.status
+                if (dataResponse.status === 415) {
+
+                } else
+
+                    if (await dataResponse.json()) {
+                        const result = await dataResponse.json();
+                        return {
+                            error: result[0],
+                            status: dataResponse.status
+                        }
+                    } else {
+                        return {
+                            status: dataResponse.status
+                        }
                     }
-                } else {
-                    return {
-                        status: dataResponse.status
-                    }
-                }
+            } else {
+                const data = await dataResponse.json();
+                return data;
             }
-            const data = await dataResponse.json();
-            return data;
+
         } catch (error) {
             return error
         }
@@ -83,10 +94,13 @@
     function clearError() {
         $(".w-form-fail").css("display", "none");
         $(".w-form-fail").text("");
+        $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
+        preloader.style.display = "none";
     }
     const api = authFetch;
     var urlSchedule = "https://ici002.capef.com.br/apiagendamento";
     var urlCalend = "https://ici002.capef.com.br/apiagendamento";
+
 
     function showFormFailMessage(message) {
         $(".w-form-fail").css("display", "block");
@@ -163,7 +177,7 @@
                 return;
             } else {
                 if (data.error) {
-                    console.log("error ===> ", data.error);
+                    
                     return;
                 }
                 clearError();
@@ -183,7 +197,7 @@
                 }
             }
         } catch (error) {
-            console.log(error);
+            console.log("error");
         }
     }
 
@@ -193,14 +207,14 @@
     }
 
     function loadDaysOfMonth(selectElement, selectedMonth) {
-        
+
         selectElement.empty();
 
         const currentDate = new Date();
-        const currentMonth = currentDate.getMonth()+1;
+        const currentMonth = currentDate.getMonth() + 1;
         let currentDay = 1;
 
-      
+
         let daysInMonth = 31;
 
         if (selectedMonth === currentMonth) {
@@ -212,28 +226,28 @@
             selectElement.append(option);
         }
 
-        
+
     }
 
     function loadMonths(selectElement) {
-       
+
         selectElement.empty();
 
-       
+
         const currentDate = new Date();
         const currentMonth = currentDate.getMonth();
-   
-       
+
+
         for (let i = currentMonth; i < monthNames.length; i++) {
             const option = $("<option>").val(i).text(monthNames[i]);
             selectElement.append(option);
         }
     }
 
-        const diaEleme = $("#dia-input");
-        const diaEleme2 = $("#dia-input-2");
-        const mesElem = $("#mes-input");
-        const mesElem2 = $("#mes-input-2");
+    const diaEleme = $("#dia-input");
+    const diaEleme2 = $("#dia-input-2");
+    const mesElem = $("#mes-input");
+    const mesElem2 = $("#mes-input-2");
 
     async function getTimesOfToday() {
         const currentDate = new Date();
@@ -243,7 +257,7 @@
 
 
 
-       
+
 
 
         loadMonths(mesElem);
@@ -278,12 +292,14 @@
     }) {
         const response = await api(`${urlSchedule}/agendamento/existe/atendimento/${typeAtt}/cpf/${cpf}`);
         const result = response;
+
         if (result.status === 204) {
             clearError();
             showFormFailMessage("Não existe agendamento gravados que atendem aos parâmetros passados.");
             return false;
         } else {
-            const data = (await response).json();
+            clearError();
+            const data = response;
             return true;
         }
     }
@@ -291,16 +307,21 @@
         clearError();
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").prop("disabled", true);
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("carregando...");
+
         const response = await api(`${urlSchedule}/agendamento/criar`, {
             method: "POST",
             body: JSON.stringify(data)
         });
+
+
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").prop("disabled", false);
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
 
-        if (response.status === 200) {
+        if (response) {
             $("#email-form02").css("display", "none");
             $(".w-form-done").css("display", "block");
+        } else {
+            showFormFailMessage("Aconteceu algum erro verifique os dados");
         }
     }
 
@@ -308,7 +329,7 @@
         return document.querySelector(selector);
     }
     async function loadScript() {
-        
+
         await setupToken();
         getTimesOfToday();
 
@@ -318,7 +339,7 @@
             const month = $(tipoAtendimento === 1 ? "#mes-input" : "#mes-input-2").val();
             const year = $(tipoAtendimento === 1 ? "#year-input" : "#year-input-2").val();
 
-{/* <script src="https://cdn.rawgit.com/wearehero99/capef-webflow-static-js/main/agendamento/agendar-atendimento.js"></script> */}
+
 
 
             getTimes({
@@ -342,7 +363,7 @@
             tipoAtendimento = 1;
         });
         getPlans();
-        $("#dia-input, #mes-input, #year-input, #plan-input,#mes-input-2, #year-input-2, #plan-input-2, #phone-01,#phone-02, #time-input-2, #email-input,#email-input-2, #assunto-input").change(function () {
+        $("#dia-input, #mes-input, #year-input, #plan-input,#mes-input-2, #year-input-2, #plan-input-2, #phone-01,#phone-02, #time - input - 2, #email - input, #email - input - 2, #assunto - input").change(function () {
             clearError();
         })
     }
@@ -373,13 +394,15 @@
                 typeAtt: tipoAtendimento
             });
 
-            if (!resultCPF) {
+
+            if (resultCPF) {
+
                 const raw = {
                     ano: year,
                     dia: day,
-                    mes: month,
+                    mes: Number(month) + 1,
                     plano: planInputValue,
-                    assunto: tipoAtendimento === 1 ? assuntoInputValue : "Outros",
+                    assunto: tipoAtendimento,
                     horario: timeInputValue,
                     cpf: cpfInputValue.replace(/\./g, "").replace("-", ""),
                     ddd: phoneDDD.replace(" ", ""),
@@ -387,33 +410,20 @@
                     email: emailInputValue,
                     tipoAtendimento: tipoAtendimento,
                 };
-                const response = await scheduleAttend(raw);
-                console.log("response schedule ===> ", response);
 
-                if(response){
-
-                }else{
-                   $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
-                    showFormFailMessage("Aconteceu algum erro verifique os dados");
-                }
-
-                $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
-
-
+                await scheduleAttend(raw);
 
                 preloader.style.display = "none";
             }
-             $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
+            $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
 
             preloader.style.display = "none";
             return;
         } else {
             showFormFailMessage("Todos os campos são obrigatorios");
-            console.log("One or more input values are missing.");
             return;
         }
     }
-    
+
     document.querySelector("#atendimento-presencial-submit").addEventListener("click", createRegistration);
-     document.getElementById("atendimento-eletronico-submit").addEventListener("click", createRegistration);
-     
+    document.getElementById("atendimento-eletronico-submit").addEventListener("click", createRegistration);
