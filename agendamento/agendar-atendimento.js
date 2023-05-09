@@ -1,4 +1,4 @@
- let tipoAtendimento = 2;
+ let tipoAtendimento = 1;
 
     const monthNames = [
         "Janeiro",
@@ -255,19 +255,11 @@
         const currentMonth = currentDate.getMonth() + 1;
         const currentYear = currentDate.getFullYear();
 
-
-
-
-
-
         loadMonths(mesElem);
         loadMonths(mesElem2);
 
         loadDaysOfMonth(diaEleme, currentMonth);
         loadDaysOfMonth(diaEleme2, currentMonth);
-
-
-
 
         getTimes({
             day: currentDay,
@@ -313,12 +305,12 @@
             body: JSON.stringify(data)
         });
 
-
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").prop("disabled", false);
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
 
         if (response) {
-            $("#email-form02").css("display", "none");
+             $(".w-tabs").css("display", "none");
+             $(".w-tab-pane").css("display", "none");
             $(".w-form-done").css("display", "block");
         } else {
             showFormFailMessage("Aconteceu algum erro verifique os dados");
