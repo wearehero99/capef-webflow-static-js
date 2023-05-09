@@ -309,7 +309,7 @@
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
 
         if (response) {
-            $(".tab-button-box, .c-input-form, .c-input-form, .c-input-form, .c-input-tab, .c-input-form ").css("display", "none");
+            $(".email-form02").css("display", "none");
             $(".w-form-done").css("display", "block");
         } else {
             showFormFailMessage("Aconteceu algum erro verifique os dados");
