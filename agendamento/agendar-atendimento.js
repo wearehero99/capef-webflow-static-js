@@ -413,7 +413,7 @@
             preloader.style.display = "none";
             return;
         } else {
-            showFormFailMessage("Todos os campos são obrigatorios");
+            showFormFailMessage("Todos os campos são obrigatórios");
             return;
         }
     }
