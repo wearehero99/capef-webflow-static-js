@@ -352,7 +352,10 @@
                     localStorage.removeItem("usr");
                     document.querySelector(".multistep-tabs-content").style.display =
                         "none";
-                    successMessage.style.display = "block";
+                    getElement("#email-form").style.display = "none";
+                    getElement(".success-message-wrapper").style.display = "flex";
+                    getElement(".success-message").style.display = "flex";
+                    successMessage.style.display = "flex";
                 } else {
                     errorMessageFormIndicar.style.display = "block";
                     getElement("#inner-error-message").innerHTML = response.error;
