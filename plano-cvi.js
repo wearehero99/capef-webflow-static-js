@@ -327,12 +327,12 @@
                     return;
                 }
 
-                console.log("subjects", subjects.value)
+                console.log("subjects", subject.value)
 
                 const formData = {
                     nome: name.value,
                     nomeEmail: email.value,
-                    indicacao: 4,
+                    indicacao: subject.value,
                     cpfIndicando: cpf.value.replace(/\./g, "").replace("-", ""),
                 };
 
