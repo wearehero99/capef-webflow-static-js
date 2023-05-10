@@ -407,7 +407,7 @@
             preloader.style.display = "none";
             return;
         } else {
-            showFormFailMessage("Todos os campos são obrigatorios");
+            showFormFailMessage("Todos os campos são obrigatórios");
             console.log("One or more input values are missing.");
             return;
         }
