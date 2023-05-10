@@ -205,7 +205,7 @@ async function searchDemises() {
 
   if (response.length) {
     if (typeof response[0] !== "string") {
-      const filteredData = ar.filter(item=> {
+      const filteredData = response.filter(item=> {
         const data = new Date(item.data)
         if(data.getMonth()+1 === 5){
             return item
