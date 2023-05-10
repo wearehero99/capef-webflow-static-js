@@ -94,10 +94,11 @@
 
         }
 
-
+        
+        loadScript();
 
         const api = authFetch;
-        loadScript();
+        
 
         Webflow.push(function () {
 
