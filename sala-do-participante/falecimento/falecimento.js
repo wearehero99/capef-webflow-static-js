@@ -180,7 +180,7 @@ function createNoItemsMessage() {
   const lNameList = createElement("div", "l-name-list");
   const nameWrapper = createElement("div", "c-name_icon");
   const name = createElement("div", "body-normal-600");
-  const nameText = document.createTextNode("Nenhum aviso para ser exibido");
+  const nameText = document.createTextNode("Não há nenhum aviso de falecimento no mês selecionado");
 
   name.appendChild(nameText);
   nameWrapper.appendChild(name);
@@ -205,9 +205,19 @@ async function searchDemises() {
 
   if (response.length) {
     if (typeof response[0] !== "string") {
-      console.log(response);
-      const items = response.map(createListItem);
-      items.forEach((item) => list.appendChild(item));
+      const filteredData = ar.filter(item=> {
+        const data = new Date(item.data)
+        if(data.getMonth()+1 === 5){
+            return item
+        }
+      })
+
+      if(filteredData.length){
+        const items = filteredData.map(createListItem);
+              items.forEach((item) => list.appendChild(item));
+      }else{
+          list.appendChild(createNoItemsMessage());
+      }
     } else {
       list.appendChild(createNoItemsMessage());
     }
