@@ -390,7 +390,7 @@
 
 
 <script>
-    let tipoAtendimento = 2;
+    let tipoAtendimento = 1;
 
     const monthNames = [
         "Janeiro",
@@ -691,9 +691,9 @@
         const response = await api(`${urlSchedule}/agendamento/existe/atendimento/${typeAtt}/cpf/${cpf}`);
         const result = response;
 
-        if (result.status === 204) {
+        if (result.status === 400) {
             clearError();
-            showFormFailMessage("Não existe agendamento gravados que atendem aos parâmetros passados.");
+            showFormFailMessage("CPF não encontrado");
             return false;
         } else {
             clearError();
@@ -737,8 +737,6 @@
             const day = $(tipoAtendimento === 1 ? "#dia-input" : "#dia-input-2").val();
             const month = $(tipoAtendimento === 1 ? "#mes-input" : "#mes-input-2").val();
             const year = $(tipoAtendimento === 1 ? "#year-input" : "#year-input-2").val();
-
-
 
 
             getTimes({
