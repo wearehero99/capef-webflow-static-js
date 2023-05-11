@@ -290,11 +290,11 @@
         const response = await api(`${urlSchedule}/agendamento/existe/atendimento/${typeAtt}/cpf/${cpf}`);
         const result = response;
 
-        if (result.status === 204) {
+        if (result.status === 400) {
             clearError();
-            showFormFailMessage("Não existe agendamento gravados que atendem aos parâmetros passados.");
+            showFormFailMessage("CPF não encontrado");
             return false;
-        } else {
+        }  else {
             clearError();
             const data = response;
             return true;
