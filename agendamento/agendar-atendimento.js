@@ -222,8 +222,13 @@
         }
 
         for (let day = currentDay; day <= daysInMonth; day++) {
-            const option = $("<option>").val(day).text(day);
-            selectElement.append(option);
+             const date = new Date(selectedMonth + "/" + day + "/" + currentDate.getFullYear());
+                const dayOfWeek = date.getDay();
+                if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+                    const option = $("<option>").val(day).text(day);
+                    selectElement.append(option);
+                
+                }
         }
 
 
