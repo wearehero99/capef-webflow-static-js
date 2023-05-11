@@ -131,6 +131,27 @@ const makeAuthorizedRequest = async (url, apiName) => {
     .catch((error) => console.log("🚀 ~ error:", error));
 };
 
+
+function createNoItemsMessage() {
+  const listItem = createElement("li", "list-item");
+  const lDot = createElement("div", "l-dot");
+  const dot = createElement("div", "dot");
+  const lNameList = createElement("div", "l-name-list");
+  const nameWrapper = createElement("div", "c-name_icon");
+  const name = createElement("div", "body-normal-600");
+  const nameText = document.createTextNode("Não há nenhum aniversariante");
+
+  name.appendChild(nameText);
+  nameWrapper.appendChild(name);
+
+  lNameList.appendChild(nameWrapper);
+  lDot.appendChild(dot);
+  lDot.appendChild(lNameList);
+  listItem.appendChild(lDot);
+
+  return listItem;
+}
+
 const birthdayResponse = async ({ name, date }) => {
   let url;
 
@@ -223,6 +244,8 @@ async function searchBirthdays() {
   if (response.length) {
     const items = response.map(createListItem);
     items.forEach((item) => list.appendChild(item));
+  }else{
+    list.appendChild(createNoItemsMessage())
   }
   preloader.style.display = "none";
 }
