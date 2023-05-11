@@ -1,5 +1,3 @@
-// chart controller
-
 const getRequestOptions = accessToken => {
   return {
     method: 'GET',
@@ -32,38 +30,35 @@ makeAuthorizedRequest = async () => {
   const options = getRequestOptions(token.access_Token);
 
   return await fetch(
-    'https://apigraficorentabilidade.capef.com.br/Rentabilidade/ComparaCDI?planoId=2',
+    'https://apigraficorentabilidade.capef.com.br/Rentabilidade?planoId=2',
     options
   );
 };
-
-// Graphics control
 
 async function currentMonth() {
   const apiData = await makeAuthorizedRequest();
   const apiContent = await apiData.json();
   console.log(apiContent);
 
-  document.getElementById('current-month').innerText =
-    apiContent.listaRetorno[0].periodicidade;
+  const currentMonth = (document.getElementById('current-month').innerText =
+    apiContent.listaRetorno[0].periodicidade);
 
-  const [bar01, bar02] = apiContent.listaRetorno[0].indicadores.map(
-    indicadores => indicadores.vR_RENTABILIDADE
+  const [bar01, bar02, bar03] = apiContent.listaRetorno[0].indicadores.map(
+    indicador => indicador.valor
   );
 
-  console.log(bar01, bar02);
+  console.log(bar01, bar02, bar03);
 
-  const data = [bar01, bar02];
+  const data = [bar01, bar02, bar03];
   for (let i = 1; i <= data.length; i++) {
     const value = parseFloat(data[i - 1]).toFixed(2);
     document.getElementById(`bar1-${i}`).style.height = `${
-      parseFloat(value) * 4
+      parseFloat(value) * 3
     }rem`;
     document.getElementById(`percentage1-0${i}`).innerText =
       `${value} %`.replace('.', ',');
   }
 }
-
 currentMonth();
 
 async function months12() {
@@ -71,13 +66,16 @@ async function months12() {
   const apiContent = await apiData.json();
   console.log(apiContent);
 
-  const [bar01, bar02] = apiContent.listaRetorno[1].indicadores.map(
-    indicadores => indicadores.vR_RENTABILIDADE
+  const currentMonth = (document.getElementById('current-month').innerText =
+    apiContent.listaRetorno[0].periodicidade);
+
+  const [bar01, bar02, bar03] = apiContent.listaRetorno[1].indicadores.map(
+    indicador => indicador.valor
   );
 
-  console.log(bar01, bar02);
+  console.log(bar01, bar02, bar03);
 
-  const data = [bar01, bar02];
+  const data = [bar01, bar02, bar03];
   for (let i = 1; i <= data.length; i++) {
     const value = parseFloat(data[i - 1]).toFixed(2);
     document.getElementById(`bar2-${i}`).style.height = `${
@@ -87,7 +85,6 @@ async function months12() {
       `${value} %`.replace('.', ',');
   }
 }
-
 months12();
 
 async function months36() {
@@ -95,13 +92,16 @@ async function months36() {
   const apiContent = await apiData.json();
   console.log(apiContent);
 
-  const [bar01, bar02] = apiContent.listaRetorno[2].indicadores.map(
-    indicadores => indicadores.vR_RENTABILIDADE
+  const currentMonth = (document.getElementById('current-month').innerText =
+    apiContent.listaRetorno[0].periodicidade);
+
+  const [bar01, bar02, bar03] = apiContent.listaRetorno[2].indicadores.map(
+    indicador => indicador.valor
   );
 
-  console.log(bar01, bar02);
+  console.log(bar01, bar02, bar03);
 
-  const data = [bar01, bar02];
+  const data = [bar01, bar02, bar03];
   for (let i = 1; i <= data.length; i++) {
     const value = parseFloat(data[i - 1]).toFixed(2);
     document.getElementById(`bar3-${i}`).style.height = `${
@@ -111,7 +111,6 @@ async function months36() {
       `${value} %`.replace('.', ',');
   }
 }
-
 months36();
 
 async function months60() {
@@ -119,13 +118,16 @@ async function months60() {
   const apiContent = await apiData.json();
   console.log(apiContent);
 
-  const [bar01, bar02] = apiContent.listaRetorno[3].indicadores.map(
-    indicadores => indicadores.vR_RENTABILIDADE
+  const currentMonth = (document.getElementById('current-month').innerText =
+    apiContent.listaRetorno[0].periodicidade);
+
+  const [bar01, bar02, bar03] = apiContent.listaRetorno[3].indicadores.map(
+    indicador => indicador.valor
   );
 
-  console.log(bar01, bar02);
+  console.log(bar01, bar02, bar03);
 
-  const data = [bar01, bar02];
+  const data = [bar01, bar02, bar03];
   for (let i = 1; i <= data.length; i++) {
     const value = parseFloat(data[i - 1]).toFixed(2);
     document.getElementById(`bar4-${i}`).style.height = `${
@@ -135,10 +137,25 @@ async function months60() {
       `${value} %`.replace('.', ',');
   }
 }
-
 months60();
 
-makeAuthorizedRequest02 = async () => {
+async function getToken() {
+  return await fetch(
+    `https://apigraficorentabilidade.capef.com.br/Auth/Access-Token`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: 'Hero99',
+        password: 'd7OwsEqTXc'
+      })
+    }
+  )
+    .then(response => response.json())
+    .catch(error => console.log('🚀 ~ error:', error));
+}
+
+makeAuthorizedRequest = async () => {
   const token = await getToken();
   const options = getRequestOptions(token.access_Token);
 
@@ -148,17 +165,10 @@ makeAuthorizedRequest02 = async () => {
   );
 };
 
-// Gráfico de rentabilidade
-
-async function currentMonthGR() {
-  const apiData = await makeAuthorizedRequest02();
+async function currentMonth() {
+  const apiData = await makeAuthorizedRequest();
   const apiContent = await apiData.json();
   console.log(apiContent);
-
-  const grMes = (document.getElementById('gr-mes').innerText =
-    apiContent.colunaValores[0].descricao);
-  const grAno = (document.getElementById('gr-ano').innerText =
-    apiContent.colunaValores[1].descricao);
 
   const cdiMes = (document.getElementById('cdi-mes').innerText =
     apiContent.listaIndices[0].vr_rentab_mes);
@@ -186,4 +196,4 @@ async function currentMonthGR() {
     apiContent.listaIndices[3].vr_rentab_ano);
 }
 
-currentMonthGR();
+currentMonth();
