@@ -326,7 +326,7 @@
             $("#email-form02").css("display", "none");
             $(".w-form-done").css("display", "block");
         } else {
-            showFormFailMessage("Aconteceu algum erro verifique os dados");
+            showFormFailMessage(response.data);
         }
     }
 
