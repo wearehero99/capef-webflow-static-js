@@ -139,23 +139,8 @@ async function months60() {
 }
 months60();
 
-async function getToken() {
-  return await fetch(
-    `https://apigraficorentabilidade.capef.com.br/Auth/Access-Token`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        username: 'Hero99',
-        password: 'd7OwsEqTXc'
-      })
-    }
-  )
-    .then(response => response.json())
-    .catch(error => console.log('🚀 ~ error:', error));
-}
-
-makeAuthorizedRequest = async () => {
+// Gráfico de rentabilidade
+makeAuthorizedRequest02 = async () => {
   const token = await getToken();
   const options = getRequestOptions(token.access_Token);
 
@@ -165,10 +150,15 @@ makeAuthorizedRequest = async () => {
   );
 };
 
-async function currentMonth() {
-  const apiData = await makeAuthorizedRequest();
+async function currentMonthGR() {
+  const apiData = await makeAuthorizedRequest02();
   const apiContent = await apiData.json();
   console.log(apiContent);
+
+  const grMes = (document.getElementById('gr-mes').innerText =
+    apiContent.colunaValores[0].descricao);
+  const grAno = (document.getElementById('gr-ano').innerText =
+    apiContent.colunaValores[1].descricao);
 
   const cdiMes = (document.getElementById('cdi-mes').innerText =
     apiContent.listaIndices[0].vr_rentab_mes);
@@ -196,4 +186,4 @@ async function currentMonth() {
     apiContent.listaIndices[3].vr_rentab_ano);
 }
 
-currentMonth();
+currentMonthGR();
