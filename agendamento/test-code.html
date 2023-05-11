@@ -452,6 +452,15 @@
                 await setupToken();
                 getTimesOfToday();
             }
+
+            if (dataResponse.status === 400) {
+                const result = await dataResponse.json();
+
+                return {
+                    status: dataResponse.status,
+                    data: result[0]
+                }
+            }
             if (dataResponse.status === 204) {
                 return {
                     status: dataResponse.status
@@ -712,15 +721,17 @@
         });
 
 
+        console.log("response===> ", response)
+
+
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").prop("disabled", false);
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
 
-        if (response) {
-            //w-tab-pane
+        if (response.id) {
             $(".tab-button-box, .c-input-form, .c-input-form, .c-input-form, .c-input-tab, .c-input-form ").css("display", "none");
             $(".w-form-done").css("display", "block");
         } else {
-            showFormFailMessage("Aconteceu algum erro verifique os dados");
+            showFormFailMessage(response.data);
         }
     }
 

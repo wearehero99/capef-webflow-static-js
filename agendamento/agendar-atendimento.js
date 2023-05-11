@@ -51,7 +51,13 @@
                 headers
             });
 
-
+            if (dataResponse.status === 400) {
+                const result = await dataResponse.json();
+                return {
+                    status: dataResponse.status,
+                    data: result[0]
+                }
+            }
 
 
             if (dataResponse.status === 401) {
@@ -310,10 +316,11 @@
             body: JSON.stringify(data)
         });
 
+
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").prop("disabled", false);
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
 
-        if (response) {
+        if (response.id) {
             //.solicitation-form-2
             $(".solicitation-form-2").css("display", "none");
             $("#email-form02").css("display", "none");
@@ -413,6 +420,7 @@
 
                 preloader.style.display = "none";
             }
+
             $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
 
             preloader.style.display = "none";
