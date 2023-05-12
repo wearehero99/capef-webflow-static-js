@@ -51,9 +51,7 @@ async function currentMonth() {
     indicadores => indicadores.vR_RENTABILIDADE
   );
 
-  console.log(bar01, bar02);
-
-  const data = [bar01, bar02];
+  const data = [bar02, bar01];
   for (let i = 1; i <= data.length; i++) {
     const value = parseFloat(data[i - 1]).toFixed(2);
     document.getElementById(`bar1-${i}`).style.height = `${
@@ -71,11 +69,9 @@ async function months12() {
   const apiContent = await apiData.json();
   console.log(apiContent);
 
-  const [bar01, bar02] = apiContent.listaRetorno[1].indicadores.map(
+  const [bar02, bar01] = apiContent.listaRetorno[1].indicadores.map(
     indicadores => indicadores.vR_RENTABILIDADE
   );
-
-  console.log(bar01, bar02);
 
   const data = [bar01, bar02];
   for (let i = 1; i <= data.length; i++) {
@@ -99,8 +95,6 @@ async function months36() {
     indicadores => indicadores.vR_RENTABILIDADE
   );
 
-  console.log(bar01, bar02);
-
   const data = [bar01, bar02];
   for (let i = 1; i <= data.length; i++) {
     const value = parseFloat(data[i - 1]).toFixed(2);
@@ -117,15 +111,12 @@ months36();
 async function months60() {
   const apiData = await makeAuthorizedRequest();
   const apiContent = await apiData.json();
-  console.log(apiContent);
 
   const [bar01, bar02] = apiContent.listaRetorno[3].indicadores.map(
     indicadores => indicadores.vR_RENTABILIDADE
   );
 
-  console.log(bar01, bar02);
-
-  const data = [bar01, bar02];
+  const data = [bar02, bar01];
   for (let i = 1; i <= data.length; i++) {
     const value = parseFloat(data[i - 1]).toFixed(2);
     document.getElementById(`bar4-${i}`).style.height = `${
