@@ -1,14 +1,3 @@
-const getRequestOptions = accessToken => {
-  return {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Bearer ${accessToken}`
-    },
-    redirect: 'follow'
-  };
-};
-
 async function getToken() {
   return await fetch(
     `https://apigraficorentabilidade.capef.com.br/Auth/Access-Token`,
