@@ -47,9 +47,7 @@ async function currentMonth() {
     indicador => indicador.valor
   );
 
-  console.log(bar01, bar02, bar03);
-
-  const data = [bar01, bar02, bar03];
+  const data = [bar01, bar03, bar02];
   for (let i = 1; i <= data.length; i++) {
     const value = parseFloat(data[i - 1]).toFixed(2);
     document.getElementById(`bar1-${i}`).style.height = `${
@@ -64,18 +62,15 @@ currentMonth();
 async function months12() {
   const apiData = await makeAuthorizedRequest();
   const apiContent = await apiData.json();
-  console.log(apiContent);
 
   const [bar01, bar02, bar03] = apiContent.listaRetorno[1].indicadores.map(
     indicador => indicador.valor
   );
 
-  console.log(bar01, bar02, bar03);
-
-  const data = [bar01, bar02, bar03];
+  const data = [bar01, bar03, bar02];
   for (let i = 1; i <= data.length; i++) {
     const value = parseFloat(data[i - 1]).toFixed(2);
-    document.getElementById(`bar1-0${i}`).style.height = `${
+    document.getElementById(`bar2-${i}`).style.height = `${
       parseFloat(value) * 2
     }%`;
     document.getElementById(`percentage2-0${i}`).innerText =
@@ -87,15 +82,12 @@ months12();
 async function months36() {
   const apiData = await makeAuthorizedRequest();
   const apiContent = await apiData.json();
-  console.log(apiContent);
 
   const [bar01, bar02, bar03] = apiContent.listaRetorno[2].indicadores.map(
     indicador => indicador.valor
   );
 
-  console.log(bar01, bar02, bar03);
-
-  const data = [bar01, bar02, bar03];
+  const data = [bar01, bar03, bar02];
   for (let i = 1; i <= data.length; i++) {
     const value = parseFloat(data[i - 1]).toFixed(2);
     document.getElementById(`bar3-${i}`).style.height = `${
@@ -110,7 +102,6 @@ months36();
 async function months60() {
   const apiData = await makeAuthorizedRequest();
   const apiContent = await apiData.json();
-  console.log(apiContent);
 
   const currentMonth = (document.getElementById('current-month').innerText =
     apiContent.listaRetorno[0].periodicidade);
@@ -119,9 +110,7 @@ async function months60() {
     indicador => indicador.valor
   );
 
-  console.log(bar01, bar02, bar03);
-
-  const data = [bar01, bar02, bar03];
+  const data = [bar01, bar03, bar02];
   for (let i = 1; i <= data.length; i++) {
     const value = parseFloat(data[i - 1]).toFixed(2);
     document.getElementById(`bar4-${i}`).style.height = `${
