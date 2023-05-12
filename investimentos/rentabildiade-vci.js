@@ -120,4 +120,5 @@ async function months60() {
       `${value} %`.replace('.', ',');
   }
 }
+
 months60();
