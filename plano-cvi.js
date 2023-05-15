@@ -376,7 +376,7 @@ Webflow.push(function () {
     $('#email').bind('keypress', alphaOnly);
   });
 
-  const getRequestOptions = accessToken => {
+  const getRequestOptions4 = accessToken => {
     return {
       method: 'GET',
       headers: {

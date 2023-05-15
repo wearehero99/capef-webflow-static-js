@@ -1,6 +1,6 @@
 // chart controller
 
-const getRequestOptions = accessToken => {
+const getRequestOptions5 = accessToken => {
   return {
     method: 'GET',
     headers: {
@@ -29,7 +29,7 @@ async function getToken() {
 
 makeAuthorizedRequest = async () => {
   const token = await getToken();
-  const options = getRequestOptions(token.access_Token);
+  const options = getRequestOptions5(token.access_Token);
 
   return await fetch(
     'https://apigraficorentabilidade.capef.com.br/Rentabilidade/ComparaCDI?planoId=2',
