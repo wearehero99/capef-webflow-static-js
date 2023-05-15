@@ -386,7 +386,7 @@
                 $('#email').bind('keypress', alphaOnly);
             });
 
-            const getRequestOptions = accessToken => {
+            const getRequestOptions4 = accessToken => {
                 return {
                     method: 'GET',
                     headers: {
@@ -398,6 +398,7 @@
             };
 
             async function checkCPF(cpf) {
+                await setupToken()
                 const response = await api(`https://apiconsulta.capef.com.br/CPF/${cpf.replace(/\./g, "").replace("-", "")}`, { key: "https://apiconsulta.capef.com.br" });
                 if (response.valido) {
                     await setupToken({ url: urlIndicacao });

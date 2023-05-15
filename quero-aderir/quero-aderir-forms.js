@@ -97,7 +97,7 @@ function getElement(selector) {
   return document.querySelector(selector);
 }
 
-const getRequestOptions = accessToken => {
+const getRequestOptions1 = accessToken => {
   return {
     method: 'GET',
     headers: { Authorization: `Bearer ${accessToken}` },
@@ -152,7 +152,7 @@ async function getToken(apiName) {
 
 const makeAuthorizedRequest = async (url, apiName) => {
   const token = await getToken(API_NAMES[apiName]);
-  const options = getRequestOptions(token.access_Token);
+  const options = getRequestOptions1(token.access_Token);
 
   try {
     const response = await fetch(url, options);
