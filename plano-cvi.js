@@ -5,7 +5,7 @@
         async function setupToken({ url }) {
             let token = localStorage.getItem(url);
 
-            if (!token) {
+          
                 const authResponse = await fetch(`${url}/Auth/Access-Token`, {
                     method: "POST",
                     body: JSON.stringify({
@@ -25,7 +25,7 @@
                 token = authData.access_Token;
 
                 localStorage.setItem(url, token);
-            }
+          
         }
 
 
@@ -91,7 +91,6 @@
         async function loadScript() {
             await setupToken({ url: urlConsulta });
             await setupToken({ url: urlIndicacao });
-
         }
 
         
@@ -158,6 +157,7 @@
             });
 
             const btnCloseIndicacao = document.querySelectorAll('.btn-close-indicacao');
+
             btnCloseIndicacao.forEach(item => {
                 item.addEventListener('click', () => {
                     window.location.reload();
@@ -174,6 +174,7 @@
             let usr = usrStore ? usrStore : {};
 
             printUsr();
+
             for (let index = 0; index < fields.length; index++) {
                 const field = fields[index];
 
@@ -307,8 +308,7 @@
                 const cpf = document.getElementById("cpf-form-2");
                 const subject = document.getElementById("Assunto");
 
-                console.log("subjects", subject.value)
-
+              
                 const requiredFields = [name, email, subject];
 
                 for (let index = 0; index < requiredFields.length; index++) {
@@ -329,7 +329,6 @@
                     return;
                 }
 
-                console.log("subjects", subject.value)
 
                 const formData = {
                     nome: name.value,
@@ -348,7 +347,6 @@
                     body: JSON.stringify(formData),
                 });
 
-                console.log("response", response)
 
                 if (response.id) {
                     localStorage.removeItem("usr");
@@ -418,7 +416,7 @@
                 const validate = await checkCPF(cpf.value);
 
                 if (validate) {
-
+                    getElement("#inner-error-message").style.display = "none"
                     getElement("#tab1").style.display = "none";
                     getElement("#refer-friend-tab2").style.display = "block";
 
