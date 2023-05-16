@@ -156,7 +156,11 @@ const makeAuthorizedRequest = async (url, apiName) => {
 
   try {
     const response = await fetch(url, options);
-    return await response.json();
+
+
+      return await response.json();   
+
+    
   } catch (error) {
     console.error(`Error making ${apiName} request:`, error);
     return null;
@@ -197,20 +201,28 @@ getElement('#close-btn-join-modal').addEventListener('click', () => {
 
 getElement('#submit-cpf').addEventListener('click', async () => {
   getElement('#failure-cpf').style.display = 'none';
+  const errorMsg = getElement("#error-msg-cpf")
+
   formQueroAderir.style.display = 'none';
   loading.style.display = 'block';
 
   const isCPFValid = await validateCPF(cpfAdesao.value);
 
-  if (isCPFValid) {
-    successCPF.style.display = 'block';
-    sendReview.style.display = 'block';
+  console.log(isCPFValid)
+
+  if (!isCPFValid) {
+      console.log("CPF inválido")
+      getElement('#failure-cpf').style.display = "block"
+      errorMsg.style.display = "block"
+      errorMsg.innerText = "CPF inválido"
   } else {
     successCPF.style.display = 'block';
     sendReview.style.display = 'none';
   }
+
   formQueroAderir.style.display = 'block';
   loading.style.display = 'none';
+
 });
 
 getElement('#cpf-simulator-submit').addEventListener('click', async () => {
