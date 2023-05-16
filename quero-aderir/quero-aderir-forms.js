@@ -1,9 +1,9 @@
 $(document).ready(function () {
-  $('#cpf-simulator').mask({ mask: '999.999.999-99' });
-  $('#adesao-cpf').mask({ mask: '999.999.999-99' });
-  $('#recommendation-cpf').mask({ mask: '999.999.999-99' });
-  $('#cpf-form').mask({ mask: '999.999.999-99' });
-  $('#phone-form').mask({ mask: '(99) 99999-9999' });
+  $('#cpf-simulator').mask('999.999.999-99');
+  $('#adesao-cpf').mask('999.999.999-99');
+  $('#recommendation-cpf').mask('999.999.999-99');
+  $('#cpf-form').mask('999.999.999-99');
+  $('#phone-form').mask('(99) 99999-9999');
 });
 
 function slider2() {
