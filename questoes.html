@@ -1,0 +1,89 @@
+<div class="question">
+    <p>How easy is it to resolve demands with CAPEF?</p>
+    <button onclick="identifyAnswer(this)">1</button>
+    <button onclick="identifyAnswer(this)">2</button>
+    <button onclick="identifyAnswer(this)">3</button>
+    <button onclick="identifyAnswer(this)">4</button>
+    <button onclick="identifyAnswer(this)">5</button>
+    <button onclick="identifyAnswer(this)">6</button>
+    <button onclick="identifyAnswer(this)">7</button>
+    <button onclick="identifyAnswer(this)">8</button>
+    <button onclick="identifyAnswer(this)">9</button>
+    <button onclick="identifyAnswer(this)">10</button>
+</div>
+
+<div class="question">
+    <p>How much do you recommend?</p>
+    <button onclick="identifyAnswer(this)">1</button>
+    <button onclick="identifyAnswer(this)">2</button>
+    <button onclick="identifyAnswer(this)">3</button>
+    <button onclick="identifyAnswer(this)">4</button>
+    <button onclick="identifyAnswer(this)">5</button>
+    <button onclick="identifyAnswer(this)">6</button>
+    <button onclick="identifyAnswer(this)">7</button>
+    <button onclick="identifyAnswer(this)">8</button>
+    <button onclick="identifyAnswer(this)">9</button>
+    <button onclick="identifyAnswer(this)">10</button>
+</div>
+
+<div class="question">
+    <p>What points do you give?</p>
+    <button onclick="identifyAnswer(this)">1</button>
+    <button onclick="identifyAnswer(this)">2</button>
+    <button onclick="identifyAnswer(this)">3</button>
+    <button onclick="identifyAnswer(this)">4</button>
+    <button onclick="identifyAnswer(this)">5</button>
+    <button onclick="identifyAnswer(this)">6</button>
+    <button onclick="identifyAnswer(this)">7</button>
+    <button onclick="identifyAnswer(this)">8</button>
+    <button onclick="identifyAnswer(this)">9</button>
+    <button onclick="identifyAnswer(this)">10</button>
+</div>
+
+<div class="question">
+    <p>ALGUMA COISA AI?</p>
+    <button onclick="identifyAnswer(this)">1</button>
+    <button onclick="identifyAnswer(this)">2</button>
+    <button onclick="identifyAnswer(this)">3</button>
+    <button onclick="identifyAnswer(this)">4</button>
+    <button onclick="identifyAnswer(this)">5</button>
+    <button onclick="identifyAnswer(this)">6</button>
+    <button onclick="identifyAnswer(this)">7</button>
+    <button onclick="identifyAnswer(this)">8</button>
+    <button onclick="identifyAnswer(this)">9</button>
+    <button onclick="identifyAnswer(this)">10</button>
+</div>
+
+<div class="question">
+    <p>Hello world?</p>
+    <button onclick="identifyAnswer(this)">1</button>
+    <button onclick="identifyAnswer(this)">2</button>
+    <button onclick="identifyAnswer(this)">3</button>
+    <button onclick="identifyAnswer(this)">4</button>
+    <button onclick="identifyAnswer(this)">5</button>
+    <button onclick="identifyAnswer(this)">6</button>
+    <button onclick="identifyAnswer(this)">7</button>
+    <button onclick="identifyAnswer(this)">8</button>
+    <button onclick="identifyAnswer(this)">9</button>
+    <button onclick="identifyAnswer(this)">10</button>
+</div>
+
+
+<script>
+
+    var questionObj = {};
+
+    function identifyAnswer(btn) {
+        var questionContainer = btn.parentElement;
+        var questionNumber = Array.from(questionContainer.parentElement.children).indexOf(questionContainer) + 1;
+
+        var questionAsked = questionContainer.querySelector("p").textContent
+        var answerValue = btn.innerText
+
+
+        questionObj[questionAsked] = answerValue;
+
+
+        console.log("questionObj", questionObj)
+    }
+</script>
