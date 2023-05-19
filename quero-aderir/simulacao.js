@@ -1,17 +1,17 @@
   const preloadloadingIcon = document.getElementById("loading-icon-simulation");
-        const preloader = document.getElementById("preloader");
+        const preloaderSimulation = document.getElementById("preloader");
         preloadloadingIcon.style.background = "#28343e";
         preloadloadingIcon.style.padding = "10px";
         preloadloadingIcon.style.borderRadius = "6px";
         preloadloadingIcon.style.boxShadow = "0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.2)";
-        if (preloader) {
-            preloader.style.display = "none";
-            preloader.style.opacity = 1;
-            preloader.style.position = "fixed";
-            preloader.style.top = 0;
-            preloader.style.left = 0;
-            preloader.style.width = "100%";
-            preloader.style.height = "100%";
+        if (preloaderSimulation) {
+            preloaderSimulation.style.display = "none";
+            preloaderSimulation.style.opacity = 1;
+            preloaderSimulation.style.position = "fixed";
+            preloaderSimulation.style.top = 0;
+            preloaderSimulation.style.left = 0;
+            preloaderSimulation.style.width = "100%";
+            preloaderSimulation.style.height = "100%";
         }
 
        
@@ -180,7 +180,7 @@
 
             if (rawCpf.length !== 11) {
             } else {
-                preloader.style.display = "flex";
+                preloaderSimulation.style.display = "flex";
                 if (await checkCPF(cpf)) {
                     simulatorResults.style.display = "flex"
                     simulatorResults.style.opacity = 1
@@ -190,7 +190,7 @@
                     errorMsg.innerText = "CPF não é valido"
                     console.log("CPF não é valido")
                 }
-                preloader.style.display = "none";
+                preloaderSimulation.style.display = "none";
             }
         }
         )
