@@ -166,8 +166,9 @@
         document.getElementById("cpf-simulator-submit").addEventListener("click", async () => {
             const errorContainer = document.getElementById("simulation-error")
             const errorMsg = document.getElementById("simulation-error-msg")
-            console.log("Show something....")
-
+           
+           
+            
             errorContainer.style.display = "none"
             errorMsg.innerText = ""
 

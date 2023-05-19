@@ -1828,56 +1828,56 @@
 
   <script>
 
-    $("#cpf-simulator").mask("999.999.999-99");
+    // $("#cpf-simulator").mask("999.999.999-99");
 
-    document.getElementById("cpf-simulator-submit").addEventListener("click", () => {
+    // document.getElementById("cpf-simulator-submit").addEventListener("click", () => {
 
-      errorContainer.style.display = "none"
-      errorMsg.innerText = ""
+    //   errorContainer.style.display = "none"
+    //   errorMsg.innerText = ""
 
-      const cpf = document.getElementById("cpf-simulator")
-      const errorContainer = document.getElementById("simulation-error")
-      const errorMsg = document.getElementById("simulation-error-msg")
+    //   const cpf = document.getElementById("cpf-simulator")
+    //   const errorContainer = document.getElementById("simulation-error")
+    //   const errorMsg = document.getElementById("simulation-error-msg")
 
-      if (cpf.length !== 11) {
-        errorContainer.style.display = "block"
-        errorMsg.innerText = "CPF inválido"
-      } else {
-        errorContainer.style.display = "none"
-        console.log("Simulate with CPF")
-      }
-    })
+    //   if (cpf.length !== 11) {
+    //     errorContainer.style.display = "block"
+    //     errorMsg.innerText = "CPF inválido"
+    //   } else {
+    //     errorContainer.style.display = "none"
+    //     console.log("Simulate with CPF")
+    //   }
+    // })
 
   </script>
 
 
   <script>
-    $("#cpf-simulator").mask("999.999.999-99");
+    // $("#cpf-simulator").mask("999.999.999-99");
 
-    document.getElementById("cpf-simulator-submit").addEventListener("click", () => {
+    // document.getElementById("cpf-simulator-submit").addEventListener("click", () => {
 
-      console.log("Show something....")
+    //   console.log("Show something....")
 
-      // errorContainer.style.display = "none"
-      // errorMsg.innerText = ""
+    //   // errorContainer.style.display = "none"
+    //   // errorMsg.innerText = ""
 
-      const simulatorResults = document.getElementById("simulation-results")
+    //   const simulatorResults = document.getElementById("simulation-results")
 
-      const cpf = document.getElementById("cpf-simulator").value
-      // const errorContainer = document.getElementById("simulation-error")
-      // const errorMsg = document.getElementById("simulation-error-msg")
-      const rawCpf = cpf.replace(/\./g, "").replace("-", "")
+    //   const cpf = document.getElementById("cpf-simulator").value
+    //   // const errorContainer = document.getElementById("simulation-error")
+    //   // const errorMsg = document.getElementById("simulation-error-msg")
+    //   const rawCpf = cpf.replace(/\./g, "").replace("-", "")
 
-      if (rawCpf.length !== 11) {
-        // errorContainer.style.display = "block"
-        // errorMsg.innerText = "CPF inválido"
-      } else {
-        //    errorContainer.style.display = "none"
-        simulatorResults.style.display = "flex"
-        simulatorResults.style.opacity = 1
-      }
-    }
-    )
+    //   if (rawCpf.length !== 11) {
+    //     // errorContainer.style.display = "block"
+    //     // errorMsg.innerText = "CPF inválido"
+    //   } else {
+    //     //    errorContainer.style.display = "none"
+    //     simulatorResults.style.display = "flex"
+    //     simulatorResults.style.opacity = 1
+    //   }
+    // }
+    // )
   </script>
 
 
