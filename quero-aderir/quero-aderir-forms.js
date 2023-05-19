@@ -94,11 +94,13 @@ const loadingSimulation = getElement('#loading-icon-simulation');
 const cpfSimulation = getElement('#cpf-simulator');
 
   const loadingIcon = document.getElementById("loading-icon");
+
         const preloader = document.getElementById("preloader-adesao");
         loadingIcon.style.background = "#28343e";
         loadingIcon.style.padding = "10px";
         loadingIcon.style.borderRadius = "6px";
         loadingIcon.style.boxShadow = "0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.2)";
+
         if (preloader) {
             preloader.style.display = "none";
             preloader.style.opacity = 1;
@@ -219,12 +221,14 @@ getElement('#submit-cpf').addEventListener('click', async () => {
   getElement('#failure-cpf').style.display = 'none';
   const errorMsg = getElement("#error-msg-cpf")
 
+  preloader.style.display = "flex"
+  loadingIcon.style.display = "flex"
+
   successCPF.style.display = 'none';
   formQueroAderir.style.display = 'none';
   loading.style.display = 'block';
   
-  preloader.style.display = "flex"
-  loadingIcon.style.display = "flex"
+  
 
   const isCPFValid = await validateCPF(cpfAdesao.value);
 
