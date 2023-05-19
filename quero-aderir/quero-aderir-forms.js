@@ -93,6 +93,22 @@ const formSimulation = getElement('#form-simulation');
 const loadingSimulation = getElement('#loading-icon-simulation');
 const cpfSimulation = getElement('#cpf-simulator');
 
+  const loadingIcon = document.getElementById("loading-icon");
+        const preloader = document.getElementById("preloader-adesao");
+        loadingIcon.style.background = "#28343e";
+        loadingIcon.style.padding = "10px";
+        loadingIcon.style.borderRadius = "6px";
+        loadingIcon.style.boxShadow = "0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.2)";
+        if (preloader) {
+            preloader.style.display = "none";
+            preloader.style.opacity = 1;
+            preloader.style.position = "fixed";
+            preloader.style.top = 0;
+            preloader.style.left = 0;
+            preloader.style.width = "100%";
+            preloader.style.height = "100%";
+        }
+
 function getElement(selector) {
   return document.querySelector(selector);
 }
@@ -203,8 +219,10 @@ getElement('#submit-cpf').addEventListener('click', async () => {
   getElement('#failure-cpf').style.display = 'none';
   const errorMsg = getElement("#error-msg-cpf")
 
+  successCPF.style.display = 'none';
   formQueroAderir.style.display = 'none';
   loading.style.display = 'block';
+  preloader.style.display = "flex"
 
   const isCPFValid = await validateCPF(cpfAdesao.value);
 
@@ -220,6 +238,7 @@ getElement('#submit-cpf').addEventListener('click', async () => {
     sendReview.style.display = 'none';
   }
 
+  preloader.style.display = "flex"
   formQueroAderir.style.display = 'block';
   loading.style.display = 'none';
 
