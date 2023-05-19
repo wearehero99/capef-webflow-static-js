@@ -222,7 +222,9 @@ getElement('#submit-cpf').addEventListener('click', async () => {
   successCPF.style.display = 'none';
   formQueroAderir.style.display = 'none';
   loading.style.display = 'block';
+  
   preloader.style.display = "flex"
+  loadingIcon.style.display = "flex"
 
   const isCPFValid = await validateCPF(cpfAdesao.value);
 
@@ -238,7 +240,8 @@ getElement('#submit-cpf').addEventListener('click', async () => {
     sendReview.style.display = 'none';
   }
 
-  preloader.style.display = "flex"
+  preloader.style.display = "none"
+  loadingIcon.style.display = "none"
   formQueroAderir.style.display = 'block';
   loading.style.display = 'none';
 
