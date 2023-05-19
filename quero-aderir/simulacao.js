@@ -1,9 +1,9 @@
-  const loadingIcon = document.getElementById("loading-icon-simulation");
+  const preloadloadingIcon = document.getElementById("loading-icon-simulation");
         const preloader = document.getElementById("preloader");
-        loadingIcon.style.background = "#28343e";
-        loadingIcon.style.padding = "10px";
-        loadingIcon.style.borderRadius = "6px";
-        loadingIcon.style.boxShadow = "0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.2)";
+        preloadloadingIcon.style.background = "#28343e";
+        preloadloadingIcon.style.padding = "10px";
+        preloadloadingIcon.style.borderRadius = "6px";
+        preloadloadingIcon.style.boxShadow = "0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.2)";
         if (preloader) {
             preloader.style.display = "none";
             preloader.style.opacity = 1;
