@@ -151,6 +151,9 @@ Webflow.push(function () {
 
   indicarNovamente.addEventListener('click', () => {
     successMessage.style.display = 'none';
+    document.getElementById("nome-amigo").value = "";
+    document.getElementById("email").value = "";
+    getElement("#refer-friend-tab2").style.display = "block";
     document.querySelector('.multistep-tabs-content').style.display = 'block';
   });
 
@@ -402,11 +405,11 @@ Webflow.push(function () {
     preloader.style.display = 'flex';
     form.style.justifyContent = 'center';
     formErrorMessage.style.display = 'none';
+    errorMessageFormIndicar.style.display = "none";
 
     const validate = await checkCPF(cpf.value);
 
     if (validate) {
-
       getElement("#tab1").style.display = "none";
       getElement("#refer-friend-tab2").style.display = "block";
 
@@ -422,4 +425,6 @@ Webflow.push(function () {
     form.style.justifyContent = 'initial';
     formCVPlan.style.display = 'block';
   });
+
+   
 });
