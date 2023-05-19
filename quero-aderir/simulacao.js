@@ -144,6 +144,8 @@
         async function getSimulation(cpf) {
             //GET] /Simulador​/{ CPF }/Simular
 
+             await setupToken({ url: urlSimulacao });
+
             const valorContribuicao = document.getElementById("contribution-amount")
             const rendaMensalOutros = document.getElementById("other-monthly-income")
             const rendaMensalCV = document.getElementById("cv-monthly-income")
