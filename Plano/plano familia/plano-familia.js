@@ -5,7 +5,7 @@
     const errorMsg = document.getElementById("modal-error-indication-msg")
     const errorContainer = document.getElementById("modal-error-indication")
     const loadingIcon = document.getElementById("loading-icon-cv-plan");
-const choicesIndication = document.getElementById("choices-indication")
+    const choicesIndication = document.getElementById("choices-indication")
     const formContainer = document.getElementById("wf-form-plano_familia-indicacao")
      const modalWa = document.getElementById("modal-wa")
     const modalEmail = document.getElementById("modal-email")
@@ -267,7 +267,9 @@ const choicesIndication = document.getElementById("choices-indication")
           } else {
             errorContainer.style.display = "block"
             errorMsg.style.display = "block"
-            errorMsg.innerText = result.error
+            if(result.error){
+              errorMsg.innerText = result.error
+            }
           }
 
         }
