@@ -235,13 +235,24 @@ getElement('#submit-cpf').addEventListener('click', async () => {
   console.log(isCPFValid)
 
   if (!isCPFValid) {
-      console.log("CPF inválido")
+     
       getElement('#failure-cpf').style.display = "block"
       errorMsg.style.display = "block"
       errorMsg.innerText = "CPF inválido"
   } else {
-    successCPF.style.display = 'block';
-    sendReview.style.display = 'none';
+
+    const response = await cpfEligibilityCVPlan(cpfAdesao.value)
+
+    if(response.podeAderir){
+      successCPF.style.display = 'block';
+      sendReview.style.display = 'none';
+    }else{
+      getElement('#failure-cpf').style.display = "block"
+      errorMsg.style.display = "block"
+      errorMsg.innerText = "Você não pode aderir o plano"
+    }
+
+   
   }
 
   preloader.style.display = "none"
