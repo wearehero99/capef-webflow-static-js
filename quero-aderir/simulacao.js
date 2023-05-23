@@ -179,11 +179,15 @@
         }
 
         document.getElementById("cpf-simulator-submit").addEventListener("click", async () => {
+
+             const simulatorResults = document.getElementById("simulation-results")
+            
             const errorContainer = document.getElementById("simulation-error")
             const errorMsg = document.getElementById("simulation-error-msg")
            
            
-            
+            simulatorResults.style.display = "none"
+                simulatorResults.style.opacity = 0
             errorContainer.style.display = "none"
             errorMsg.innerText = ""
 
