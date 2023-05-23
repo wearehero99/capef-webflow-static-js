@@ -142,8 +142,7 @@
         }
 
         async function getSimulation(cpf) {
-            //GET] /Simulador​/{ CPF }/Simular
-
+           
              await setupToken({ url: urlSimulacao });
 
             const valorContribuicao = document.getElementById("contribution-amount")
@@ -155,13 +154,23 @@
 
             const response = await api(`${urlSimulacao}/Simulador/${cpf.replace(/\./g, "").replace("-", "")}/Simular`, { key: urlSimulacao });
 
+            if(response.rendaMensalCV){
+                simulatorResults.style.display = "flex"
+                simulatorResults.style.opacity = 1
+                rendaMensalCV.innerText = `R$ ${normalizePrice(response.rendaMensalCV)}`
+                valorContribuicao.innerText = `R$ ${normalizePrice(response.valorContribuicao)}`
+                rendaMensalOutros.innerText = `R$ ${normalizePrice(response.rendaMensalOutros)}`
+                saldoAcumulado.innerText = `R$ ${normalizePrice(response.saldoAcumuladoCV)}`
+                saldoAcumuladoOutros.innerText = `R$ ${normalizePrice(response.saldoAcumuladoOutros)}`
+                aposentadoriaPrevista.innerText = `${response.aposentadoriaPrevista}`
+            }else{
+                errorContainer.style.display = "block"
+                errorMsg.innerText = "Simulação não disponivel"
+                console.log("Simulação não disponivel")
+            }
 
-            rendaMensalCV.innerText = `R$ ${normalizePrice(response.rendaMensalCV)}`
-            valorContribuicao.innerText = `R$ ${normalizePrice(response.valorContribuicao)}`
-            rendaMensalOutros.innerText = `R$ ${normalizePrice(response.rendaMensalOutros)}`
-            saldoAcumulado.innerText = `R$ ${normalizePrice(response.saldoAcumuladoCV)}`
-            saldoAcumuladoOutros.innerText = `R$ ${normalizePrice(response.saldoAcumuladoOutros)}`
-            aposentadoriaPrevista.innerText = `${response.aposentadoriaPrevista}`
+
+            
 
         }
 
@@ -184,8 +193,6 @@
             } else {
                 preloaderSimulation.style.display = "flex";
                 if (await checkCPF(cpf)) {
-                    simulatorResults.style.display = "flex"
-                    simulatorResults.style.opacity = 1
                     getSimulation(cpf)
                 } else {
                     errorContainer.style.display = "block"
