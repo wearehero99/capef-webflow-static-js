@@ -71,7 +71,6 @@
                 if (dataResponse.status === 401) {
                     localStorage.removeItem(options.key);
                     await setupToken({ url: options.key });
-
                 }
 
 
@@ -145,6 +144,11 @@
            
              await setupToken({ url: urlSimulacao });
 
+             const simulatorResults = document.getElementById("simulation-results")
+            const errorContainer = document.getElementById("simulation-error")
+            const errorMsg = document.getElementById("simulation-error-msg")
+           
+           
             const valorContribuicao = document.getElementById("contribution-amount")
             const rendaMensalOutros = document.getElementById("other-monthly-income")
             const rendaMensalCV = document.getElementById("cv-monthly-income")
@@ -183,7 +187,7 @@
             errorContainer.style.display = "none"
             errorMsg.innerText = ""
 
-            const simulatorResults = document.getElementById("simulation-results")
+            
 
             const cpf = document.getElementById("cpf-simulator").value
 
