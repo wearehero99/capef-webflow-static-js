@@ -235,7 +235,9 @@
 
 
     async function loadCalendar() {
+         preloader.style.display = "flex"
         const response = await api(`${urlSchedule}/calendario/atendimento/${tipoAtendimento}`);
+         preloader.style.display = "none"
         const result = response[0];
 
         const diaEleme = $("#dia-input");
@@ -294,6 +296,7 @@
             return true;
         }
     }
+
     async function scheduleAttend(data) {
         clearError();
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").prop("disabled", true);
@@ -304,8 +307,6 @@
             body: JSON.stringify(data)
         });
 
-
-        console.log("response===> ", response)
 
 
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").prop("disabled", false);

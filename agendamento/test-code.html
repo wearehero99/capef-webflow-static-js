@@ -386,7 +386,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
     integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.rawgit.com/wearehero99/capef-webflow-static-js/main/jquery-mask.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/wearehero99/capef-webflow-static-js@main/jquery-mask.js"></script>
 
 
 <script>
@@ -424,10 +425,15 @@
                 "Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json"
             };
+
+
+
             const dataResponse = await fetch(url, {
                 ...options,
                 headers
             });
+
+
 
             if (dataResponse.status === 401) {
                 localStorage.removeItem("authToken");
@@ -628,7 +634,12 @@
 
 
     async function loadCalendar() {
+
+        preloader.style.display = "flex"
+
         const response = await api(`${urlSchedule}/calendario/atendimento/${tipoAtendimento}`);
+
+        preloader.style.display = "none"
         const result = response[0];
 
         const diaEleme = $("#dia-input");
