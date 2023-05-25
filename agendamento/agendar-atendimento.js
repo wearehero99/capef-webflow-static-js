@@ -1,41 +1,39 @@
- let tipoAtendimento = 1;
+    
+    document.addEventListener("contextmenu", (e) => {
+            e.preventDefault();
+        }, false);
 
-    const monthNames = [
-        "Janeiro",
-        "Fevereiro",
-        "Março",
-        "Abril",
-        "Maio",
-        "Junho",
-        "Julho",
-        "Agosto",
-        "Setembro",
-        "Outubro",
-        "Novembro",
-        "Dezembro",
-    ];
+        document.addEventListener("keydown", (e) => {
+            if (e.ctrlKey || e.keyCode == 123) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+        });
+  
+  let tipoAtendimento = 1;
 
 
     async function setupToken() {
-        let token = localStorage.getItem('authToken');
-        if (!token) {
-            const authResponse = await fetch("https://ici002.capef.com.br/apiagendamento/auth/access-token", {
-                method: "POST",
-                body: JSON.stringify({
-                    username: "Hero99",
-                    password: "d7OwsEqTXc"
-                }),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            });
-            if (!authResponse.ok) {
-                throw new Error("Failed to obtain authentication token");
+
+        const authResponse = await fetch("https://ici002.capef.com.br/apiagendamento/auth/access-token", {
+            method: "POST",
+            body: JSON.stringify({
+                username: "Hero99",
+                password: "d7OwsEqTXc"
+            }),
+            headers: {
+                "Content-Type": "application/json"
             }
-            const authData = await authResponse.json();
-            token = authData.access_Token;
-            localStorage.setItem('authToken', token);
+        });
+
+        if (!authResponse.ok) {
+            throw new Error("Failed to obtain authentication token");
         }
+
+        const authData = await authResponse.json();
+        token = authData.access_Token;
+        localStorage.setItem('authToken', token);
+
     }
 
     async function authFetch(url, options = {}) {
@@ -51,13 +49,19 @@
                 headers
             });
 
-
-
-
             if (dataResponse.status === 401) {
                 localStorage.removeItem("authToken");
                 await setupToken();
                 getTimesOfToday();
+            }
+
+            if (dataResponse.status === 400) {
+                const result = await dataResponse.json();
+
+                return {
+                    status: dataResponse.status,
+                    data: result[0]
+                }
             }
             if (dataResponse.status === 204) {
                 return {
@@ -154,6 +158,7 @@
         planInput.val(result[0].id);
         planInput2.val(result[0].id);
     }
+
     async function getTimes({
         day,
         year,
@@ -177,7 +182,7 @@
                 return;
             } else {
                 if (data.error) {
-                    
+                    console.log("error ===> ", data.error);
                     return;
                 }
                 clearError();
@@ -197,7 +202,7 @@
                 }
             }
         } catch (error) {
-            console.log("error");
+            console.log(error);
         }
     }
 
@@ -206,77 +211,85 @@
         const data = (await response).json();
     }
 
-    function loadDaysOfMonth(selectElement, selectedMonth) {
+
+
+    function loadDaysOfMonth(selectElement, days) {
 
         selectElement.empty();
 
-        const currentDate = new Date();
-        const currentMonth = currentDate.getMonth() + 1;
-        let currentDay = 1;
-
-
-        let daysInMonth = 31;
-
-        if (selectedMonth === currentMonth) {
-            currentDay = currentDate.getDate();
-        }
-
-        for (let day = currentDay; day <= daysInMonth; day++) {
-            const option = $("<option>").val(day).text(day);
-            selectElement.append(option);
-        }
-
-
-    }
-
-    function loadMonths(selectElement) {
-
-        selectElement.empty();
-
-
-        const currentDate = new Date();
-        const currentMonth = currentDate.getMonth();
-
-
-        for (let i = currentMonth; i < monthNames.length; i++) {
-            const option = $("<option>").val(i).text(monthNames[i]);
+        for (let day in days) {
+            const option = $("<option>").val(days[day]).text(days[day]);
             selectElement.append(option);
         }
     }
 
-    const diaEleme = $("#dia-input");
-    const diaEleme2 = $("#dia-input-2");
-    const mesElem = $("#mes-input");
-    const mesElem2 = $("#mes-input-2");
+    function loadYears(selectElement, years) {
+
+        selectElement.empty();
+
+        for (let year in years) {
+            const option = $("<option>").val(years[year]).text(years[year]);
+            selectElement.append(option);
+        }
+    }
+
+    function loadMonths(selectElement, months) {
+
+        selectElement.empty();
+
+        for (let month in months) {
+            const monthStr = months[month].descricao.charAt(0).toUpperCase() + months[month].descricao.slice(1)
+            const option = $("<option>").val(months[month].mes).text(monthStr);
+            selectElement.append(option);
+        }
+    }
+
+
+
+    async function loadCalendar() {
+         preloader.style.display = "flex"
+        const response = await api(`${urlSchedule}/calendario/atendimento/${tipoAtendimento}`);
+         preloader.style.display = "none"
+        const result = response[0];
+
+        const diaEleme = $("#dia-input");
+        const diaEleme2 = $("#dia-input-2");
+
+        const mesElem = $("#mes-input");
+        const mesElem2 = $("#mes-input-2")
+
+        const ano1 = $("#year-input");
+        const ano2 = $("#year-input-2")
+
+        loadDaysOfMonth(diaEleme, result.dias)
+        loadDaysOfMonth(diaEleme2, result.dias)
+
+        loadMonths(mesElem, result.mes)
+        loadMonths(mesElem2, result.mes)
+
+        loadYears(ano1, result.ano)
+        loadYears(ano2, result.ano)
+
+        getTimesOfToday()
+    }
+
+    loadCalendar()
+
 
     async function getTimesOfToday() {
-        const currentDate = new Date();
-        const currentDay = currentDate.getDate();
-        const currentMonth = currentDate.getMonth() + 1;
-        const currentYear = currentDate.getFullYear();
+        const day = $(tipoAtendimento === 1 ? "#dia-input" : "#dia-input-2").val();
+        const month = $(tipoAtendimento === 1 ? "#mes-input" : "#mes-input-2").val();
+        const year = $(tipoAtendimento === 1 ? "#year-input" : "#year-input-2").val();
 
-        loadMonths(mesElem);
-        loadMonths(mesElem2);
-
-        loadDaysOfMonth(diaEleme, currentMonth);
-        loadDaysOfMonth(diaEleme2, currentMonth);
+        console.log(day, month, year)
 
         getTimes({
-            day: currentDay,
-            year: currentYear,
-            month: currentMonth,
+            day,
+            year,
+            month: month,
             atendimentoType: tipoAtendimento
         });
     }
-
-
-    mesElem2.on("change", function () {
-        loadDaysOfMonth(diaEleme2, Number(mesElem2.val()) + 1);
-    });
-
-    mesElem.on("change", function () {
-        loadDaysOfMonth(diaEleme, Number(mesElem.val()) + 1);
-    });
 
     async function isAttendAlreadyExist({
         typeAtt,
@@ -285,9 +298,9 @@
         const response = await api(`${urlSchedule}/agendamento/existe/atendimento/${typeAtt}/cpf/${cpf}`);
         const result = response;
 
-        if (result.status === 204) {
+        if (result.status === 400) {
             clearError();
-            showFormFailMessage("Não existe agendamento gravados que atendem aos parâmetros passados.");
+            showFormFailMessage("CPF não encontrado");
             return false;
         } else {
             clearError();
@@ -295,6 +308,7 @@
             return true;
         }
     }
+
     async function scheduleAttend(data) {
         clearError();
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").prop("disabled", true);
@@ -305,14 +319,16 @@
             body: JSON.stringify(data)
         });
 
+
+
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").prop("disabled", false);
         $("#atendimento-presencial-submit, #atendimento-eletronico-submit").text("Enviar");
 
-        if (response) {
-            $("#email-form02").css("display", "none");
+        if (response.id) {
+            $(".tab-button-box, .c-input-form, .c-input-form, .c-input-form, .c-input-tab, .c-input-form ").css("display", "none");
             $(".w-form-done").css("display", "block");
         } else {
-            showFormFailMessage("Aconteceu algum erro verifique os dados");
+            showFormFailMessage(response.data);
         }
     }
 
@@ -322,15 +338,14 @@
     async function loadScript() {
 
         await setupToken();
-        getTimesOfToday();
+
+        await loadCalendar()
 
         $("#dia-input, #mes-input, #year-input, #plan-input, #dia-input-2, #mes-input-2, #year-input-2, #plan-input-2").change(function () {
             clearError();
             const day = $(tipoAtendimento === 1 ? "#dia-input" : "#dia-input-2").val();
             const month = $(tipoAtendimento === 1 ? "#mes-input" : "#mes-input-2").val();
             const year = $(tipoAtendimento === 1 ? "#year-input" : "#year-input-2").val();
-
-
 
 
             getTimes({
@@ -353,7 +368,7 @@
             await getPlans();
             tipoAtendimento = 1;
         });
-        getPlans();
+        await  getPlans();
         $("#dia-input, #mes-input, #year-input, #plan-input,#mes-input-2, #year-input-2, #plan-input-2, #phone-01,#phone-02, #time - input - 2, #email - input, #email - input - 2, #assunto - input").change(function () {
             clearError();
         })
@@ -385,6 +400,7 @@
                 typeAtt: tipoAtendimento
             });
 
+            console.log("resultCPF", resultCPF)
 
             if (resultCPF) {
 
@@ -411,7 +427,8 @@
             preloader.style.display = "none";
             return;
         } else {
-            showFormFailMessage("Todos os campos são obrigatorios");
+            showFormFailMessage("Todos os campos são obrigatórios");
+            console.log("One or more input values are missing.");
             return;
         }
     }
