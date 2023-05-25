@@ -1755,27 +1755,25 @@
   <script src="./quero-aderir-cart.js
 "></script>
 
-  <script src="./quero-aderir-forms.js
-"></script>
+  <script
+    src="https://raw.githubusercontent.com/wearehero99/capef-webflow-sources/main/quero-aderir/quero-aderir-form.js?token=GHSAT0AAAAAACAC56YQSW7CHIMPDH5M34UAZDPRQDQ"></script>
 
 
   <script>
 
 
 
-    $("#phone-form").mask("(99) 9 9999-9999");
-    $("#cpf-form").mask("999.999.999-99");
+    $(" #phone-form").mask("(99) 9 9999-9999"); $("#cpf-form").mask("999.999.999-99");
+
     const errorMsg = document.getElementById("error-msg")
+
     const errorContainer = document.getElementById("msg-ctn")
     const success = document.getElementById("success-msg")
-
     const submitBtn = document.getElementById("form-validation");
-    submitBtn.disabled = true; // disable the button initially
 
-    // add event listeners for keyup on all input fields
-    const inputFields = document.querySelectorAll("input");
+    submitBtn.disabled = true; // disable the button initially // add event listeners for keyup on all input fields const
 
-    inputFields.forEach((input) => {
+    inputFields = document.querySelectorAll("input"); inputFields.forEach((input) => {
       input.addEventListener("keyup", validateFields);
     });
 

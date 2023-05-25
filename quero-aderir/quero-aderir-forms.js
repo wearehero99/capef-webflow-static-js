@@ -220,6 +220,7 @@ getElement('#close-btn-join-modal').addEventListener('click', () => {
 getElement('#submit-cpf').addEventListener('click', async () => {
   getElement('#failure-cpf').style.display = 'none';
   const errorMsg = getElement("#error-msg-cpf")
+  const submitWebflow = document.getElementById("webflow-submit")
 
   preloader.style.display = "flex"
   loadingIcon.style.display = "flex"
@@ -245,6 +246,9 @@ getElement('#submit-cpf').addEventListener('click', async () => {
     const response = await cpfEligibilityCVPlan(cpfAdesao.value)
 
     if(response.podeAderir){
+      if(submitWebflow){
+        submitWebflow.click()
+      } 
       successCPF.style.display = 'block';
       sendReview.style.display = 'none';
       window.open("https://www.capef.com.br/arearestrita/Login?url=/arearestrita/SimuladorCV/NovoSimulador", "_blank")
