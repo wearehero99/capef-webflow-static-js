@@ -229,10 +229,18 @@ getElement('#submit-cpf').addEventListener('click', async () => {
   formQueroAderir.style.display = 'none';
   loading.style.display = 'block';
   
-  
+  if(cpfAdesao.value.length < 11){
+    preloader.style.display = "none"
+    loadingIcon.style.display = "none"
+    formQueroAderir.style.display = 'block';
+    loading.style.display = 'none';
+      getElement('#failure-cpf').style.display = "block"
+      errorMsg.style.display = "block"
+      errorMsg.innerText = "CPF não é valido"
+    return;
+  }
 
   const isCPFValid = await validateCPF(cpfAdesao.value);
-
 
   if (!isCPFValid) {
       formQueroAderir.style.display = 'block';
@@ -251,7 +259,7 @@ getElement('#submit-cpf').addEventListener('click', async () => {
       } 
       successCPF.style.display = 'block';
       sendReview.style.display = 'none';
-      window.open("https://www.capef.com.br/arearestrita/Login?url=/arearestrita/SimuladorCV/NovoSimulador", "_blank")
+      window.open("https://www.capef.com.br/arearestrita/Login?url=/arearestrita/SimuladorCV/NovoSimulador")
     }else{
       getElement('#failure-cpf').style.display = "block"
       errorMsg.style.display = "block"
