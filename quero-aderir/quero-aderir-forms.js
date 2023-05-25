@@ -232,13 +232,14 @@ getElement('#submit-cpf').addEventListener('click', async () => {
 
   const isCPFValid = await validateCPF(cpfAdesao.value);
 
-  console.log(isCPFValid)
 
   if (!isCPFValid) {
-     
+      formQueroAderir.style.display = 'block';
+        errorMsg.style.display = "block"
+      var text = "Que bom que você demonstrou interesse no Plano CV I. Entretanto, seu CPF não consta em nosso banco de dados. Que tal conhecer mais sobre o Plano Família? ";
+      var link = "https://www.example.com/plano-familia";
+      errorMsg.innerHTML = text + "<a href='" + link + "'>Link direcionando para a Página do Plano Família.</a>";
       getElement('#failure-cpf').style.display = "block"
-      errorMsg.style.display = "block"
-      errorMsg.innerText = "CPF inválido"
   } else {
 
     const response = await cpfEligibilityCVPlan(cpfAdesao.value)
@@ -246,10 +247,11 @@ getElement('#submit-cpf').addEventListener('click', async () => {
     if(response.podeAderir){
       successCPF.style.display = 'block';
       sendReview.style.display = 'none';
+      window.open("https://www.capef.com.br/arearestrita/Login?url=/arearestrita/SimuladorCV/NovoSimulador", "_blank")
     }else{
       getElement('#failure-cpf').style.display = "block"
       errorMsg.style.display = "block"
-      errorMsg.innerText = "Você não pode aderir o plano"
+      errorMsg.innerText = "Você já é participante do plano"
     }
 
    
