@@ -259,7 +259,7 @@ getElement('#submit-cpf').addEventListener('click', async () => {
       } 
       successCPF.style.display = 'block';
       sendReview.style.display = 'none';
-      window.open("https://www.capef.com.br/arearestrita/Login?url=/arearestrita/SimuladorCV/NovoSimulador")
+      window.open("https://www.capef.com.br/arearestrita/Login?url=/arearestrita/SimuladorCV/NovoSimulador", "_self")
     }else{
       getElement('#failure-cpf').style.display = "block"
       errorMsg.style.display = "block"
